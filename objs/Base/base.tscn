@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objs/Base/perimeter_platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objs/Base/north_wall.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://objs/Base/east_wall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objs/Base/ramp.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objs/Base/base_floor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objs/Base/supply_depot.tscn" type="PackedScene" id=8]
 
 [node name="base" type="Spatial"]
 
@@ -37,3 +38,6 @@ transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, -1
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="supply_depot" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
