@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objs/player.gd" type="Script" id=1]
+[ext_resource path="res://objs/protgun.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 1.02217
@@ -24,6 +25,9 @@ keep_aspect = 0
 doppler_tracking = 2
 current = true
 fov = 90.0
+
+[node name="gun" parent="rotation" instance=ExtResource( 2 )]
+transform = Transform( -0.75, 0, -1.13247e-07, 0, 0.75, 0, 1.13247e-07, 0, -0.75, -0.38093, -0.250044, 1.19603 )
 
 [node name="feet" type="RayCast" parent="."]
 enabled = true
