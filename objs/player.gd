@@ -15,10 +15,14 @@ var dir = Vector3()
 var is_sprinting = false
 var camera
 var rotation_helper
+var gun : Spatial
+var gun_animation : AnimationPlayer
 
 func _ready():
   camera = $rotation/camera
   rotation_helper = $rotation
+  gun = $rotation/gun
+  gun_animation = $rotation/gun/animation
   
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -28,12 +32,13 @@ func _physics_process(delta):
   process_movement(delta)
 
 func process_input(delta):
+  process_walk_direction()
+  process_jump()
+  process_fire()
 
-  # ----------------------------------
-  # Walking
+func process_walk_direction():
   dir = Vector3()
   var cam_xform = camera.get_global_transform()
-
   var input_movement_vector = Vector2()
 
   if Input.is_action_pressed("forward"):
@@ -49,14 +54,15 @@ func process_input(delta):
 
   dir += -cam_xform.basis.z.normalized() * input_movement_vector.y
   dir += cam_xform.basis.x.normalized() * input_movement_vector.x
-  # ----------------------------------
 
-  # ----------------------------------
-  # Jumping
-  if is_on_floor():
-    if Input.is_action_pressed("jump"):
-      vel.y = JUMP_SPEED
-  # ----------------------------------
+func process_jump():
+  if Input.is_action_pressed("jump") and is_on_floor():
+    vel.y = JUMP_SPEED
+
+func process_fire():
+  if Input.is_action_pressed("fire") && !gun_animation.is_playing():
+    gun_animation.play("default")
+    
 
 func process_movement(delta):
   dir.y = 0
