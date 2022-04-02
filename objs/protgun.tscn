@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Material.material" type="Material" id=1]
 
@@ -18,6 +18,17 @@ surfaces/0 = {
 "vertex_count": 490
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.208333
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Cube")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray( 0.0416666, 1, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.1, 1, 0.125, 1, 0, 0, 0.19918, 0, 0, 0, 1, 0.1, 0.1, 1, 0.208333, 1, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.1, 1 )
+
 [node name="protgun" type="Spatial"]
 
 [node name="Cube" type="MeshInstance" parent="."]
@@ -25,4 +36,6 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="RecoilAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+anims/default = SubResource( 2 )
