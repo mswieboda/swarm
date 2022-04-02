@@ -14,6 +14,7 @@ const GUN_DAMAGE = 35
 var vel = Vector3()
 var dir = Vector3()
 var is_sprinting = false
+var inaccuracy = 0.0
 var camera
 var rotation_helper
 var gun_animation : AnimationPlayer
@@ -34,7 +35,7 @@ func _physics_process(delta):
   process_input(delta)
   process_movement(delta)
 
-func process_input(delta):
+func process_input(_delta):
   process_walk_direction()
   process_jump()
   process_fire()
@@ -63,17 +64,19 @@ func process_jump():
     vel.y = JUMP_SPEED
 
 func process_fire():
-  if Input.is_action_pressed("fire") && !gun_animation.is_playing():
+  if Input.is_action_just_pressed("fire"):
+    # TODO: add inaccuracy after firing, and slowly regain accurracy back over time
+    gun_animation.stop()
     gun_animation.play("default")
     audio_gun_shot.play(0.0)
     
     # ray cast
     ray.force_raycast_update()
     
-    var collider = ray.get_collider()
+    var collider : PhysicsBody = ray.get_collider()
     
     if collider:
-      if collider.get_meta("type") == "enemy":
+      if collider.has_meta("type") and collider.get_meta("type") == "enemy":
         print(">>> shot enemy! ", collider)
         collider.take_damage(GUN_DAMAGE)
       else:
@@ -103,6 +106,8 @@ func process_movement(delta):
   vel.x = hvel.x
   vel.z = hvel.z
   vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
+  
+  inaccuracy = vel.length()
 
 func _input(event):
   if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
