@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+
+[node name="enemy" type="RigidBody"]
+
+[node name="collision" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="mesh" type="CSGMesh" parent="."]
+mesh = SubResource( 2 )
+material = SubResource( 3 )
