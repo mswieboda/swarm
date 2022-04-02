@@ -36,13 +36,13 @@ func process_input(delta):
 
   var input_movement_vector = Vector2()
 
-  if Input.is_key_pressed(KEY_W):
+  if Input.is_action_pressed("forward"):
     input_movement_vector.y += 1
-  if Input.is_key_pressed(KEY_S):
+  if Input.is_action_pressed("back"):
     input_movement_vector.y -= 1
-  if Input.is_key_pressed(KEY_A):
+  if Input.is_action_pressed("strafe_left"):
     input_movement_vector.x -= 1
-  if Input.is_key_pressed(KEY_D):
+  if Input.is_action_pressed("strafe_right"):
     input_movement_vector.x += 1
 
   input_movement_vector = input_movement_vector.normalized()
@@ -54,17 +54,8 @@ func process_input(delta):
   # ----------------------------------
   # Jumping
   if is_on_floor():
-    if Input.is_key_pressed(KEY_SPACE):
+    if Input.is_action_pressed("jump"):
       vel.y = JUMP_SPEED
-  # ----------------------------------
-
-  # ----------------------------------
-  # Capturing/Freeing the cursor
-  if Input.is_action_just_pressed("ui_cancel"):
-    if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-      Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-    else:
-      Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
   # ----------------------------------
 
 func process_movement(delta):
