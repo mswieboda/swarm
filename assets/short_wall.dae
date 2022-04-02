@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 3.1.2 commit date:2022-03-31, commit time:17:40, hash:cc66d1020c3b</authoring_tool>
     </contributor>
-    <created>2022-04-02T01:04:47</created>
-    <modified>2022-04-02T01:04:47</modified>
+    <created>2022-04-02T11:53:00</created>
+    <modified>2022-04-02T11:53:00</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -32,7 +32,7 @@
               <texture texture="short_wall-sampler" texcoord="UVMap"/>
             </diffuse>
             <reflectivity>
-              <float sid="specular">0.1968912</float>
+              <float sid="specular">1</float>
             </reflectivity>
             <index_of_refraction>
               <float sid="ior">1.45</float>

@@ -5,22 +5,22 @@
       <author>Blender User</author>
       <authoring_tool>Blender 3.1.2 commit date:2022-03-31, commit time:17:40, hash:cc66d1020c3b</authoring_tool>
     </contributor>
-    <created>2022-04-02T02:32:54</created>
-    <modified>2022-04-02T02:32:54</modified>
+    <created>2022-04-02T11:43:41</created>
+    <modified>2022-04-02T11:43:41</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="wall_material-effect">
+    <effect id="short_wall_material-effect">
       <profile_COMMON>
-        <newparam sid="wall_texture-surface">
+        <newparam sid="short_wall-surface">
           <surface type="2D">
-            <init_from>wall_texture</init_from>
+            <init_from>short_wall</init_from>
           </surface>
         </newparam>
-        <newparam sid="wall_texture-sampler">
+        <newparam sid="short_wall-sampler">
           <sampler2D>
-            <source>wall_texture-surface</source>
+            <source>short_wall-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -29,10 +29,10 @@
               <color sid="emission">0 0 0 1</color>
             </emission>
             <diffuse>
-              <texture texture="wall_texture-sampler" texcoord="UVMap"/>
+              <texture texture="short_wall-sampler" texcoord="UVMap"/>
             </diffuse>
             <reflectivity>
-              <float sid="specular">0.5</float>
+              <float sid="specular">0.5025907</float>
             </reflectivity>
             <index_of_refraction>
               <float sid="ior">1.45</float>
@@ -43,13 +43,13 @@
     </effect>
   </library_effects>
   <library_images>
-    <image id="wall_texture" name="wall_texture">
-      <init_from>wall_texture.png</init_from>
+    <image id="short_wall" name="short_wall">
+      <init_from>short_wall.png</init_from>
     </image>
   </library_images>
   <library_materials>
-    <material id="wall_material-material" name="wall_material">
-      <instance_effect url="#wall_material-effect"/>
+    <material id="short_wall_material-material" name="short_wall_material">
+      <instance_effect url="#short_wall_material-effect"/>
     </material>
   </library_materials>
   <library_geometries>
@@ -87,7 +87,7 @@
         <vertices id="Plane-mesh-vertices">
           <input semantic="POSITION" source="#Plane-mesh-positions"/>
         </vertices>
-        <triangles material="wall_material-material" count="2">
+        <triangles material="short_wall_material-material" count="2">
           <input semantic="VERTEX" source="#Plane-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Plane-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Plane-mesh-map-0" offset="2" set="0"/>
@@ -99,11 +99,11 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="Plane" name="Plane" type="NODE">
-        <matrix sid="transform">0.5 0 0 0 0 3.7749e-8 -0.5 0 0 0.5 3.7749e-8 0.5 0 0 0 1</matrix>
+        <matrix sid="transform">0.5 0 0 0 0 1.88745e-8 -0.5 0 0 0.25 3.7749e-8 0.25 0 0 0 1</matrix>
         <instance_geometry url="#Plane-mesh" name="Plane">
           <bind_material>
             <technique_common>
-              <instance_material symbol="wall_material-material" target="#wall_material-material">
+              <instance_material symbol="short_wall_material-material" target="#short_wall_material-material">
                 <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
               </instance_material>
             </technique_common>
