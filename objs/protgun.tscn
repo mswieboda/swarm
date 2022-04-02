@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Material.material" type="Material" id=1]
+[ext_resource path="res://assets/gun_shot_sound.wav" type="AudioStream" id=2]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
@@ -38,3 +39,6 @@ material/0 = null
 
 [node name="animation" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 2 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 2 )
