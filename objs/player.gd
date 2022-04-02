@@ -9,6 +9,7 @@ const MAX_SLOPE_ANGLE = 40
 const MOUSE_SENSITIVITY = 0.05
 const MAX_SPRINT_SPEED = 20
 const SPRINT_ACCEL = 18
+const GUN_DAMAGE = 35
 
 var vel = Vector3()
 var dir = Vector3()
@@ -64,8 +65,22 @@ func process_jump():
 func process_fire():
   if Input.is_action_pressed("fire") && !gun_animation.is_playing():
     gun_animation.play("default")
-    audio_gun_shot.play(0.0)    
-
+    audio_gun_shot.play(0.0)
+    
+    # ray cast
+    ray.force_raycast_update()
+    
+    var collider = ray.get_collider()
+    
+    if collider:
+      if collider.get_meta("type") == "enemy":
+        print(">>> shot enemy! ", collider)
+        collider.take_damage(GUN_DAMAGE)
+      else:
+        # make bullet hole
+        print(">>> shot ", collider)
+        
+      
 func process_movement(delta):
   dir.y = 0
   dir = dir.normalized()
