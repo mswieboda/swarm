@@ -5,96 +5,13 @@
       <author>Blender User</author>
       <authoring_tool>Blender 3.1.2 commit date:2022-03-31, commit time:17:40, hash:cc66d1020c3b</authoring_tool>
     </contributor>
-    <created>2022-04-01T22:09:34</created>
-    <modified>2022-04-01T22:09:34</modified>
+    <created>2022-04-01T23:21:02</created>
+    <modified>2022-04-01T23:21:02</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
-  <library_lights>
-    <light id="Sun-light" name="Sun">
-      <technique_common>
-        <directional>
-          <color sid="color">1 1 1</color>
-        </directional>
-      </technique_common>
-      <extra>
-        <technique profile="blender">
-          <type sid="type" type="int">1</type>
-          <flag sid="flag" type="int">0</flag>
-          <mode sid="mode" type="int">1</mode>
-          <gamma sid="blender_gamma" type="float">1</gamma>
-          <red sid="red" type="float">1</red>
-          <green sid="green" type="float">1</green>
-          <blue sid="blue" type="float">1</blue>
-          <shadow_r sid="blender_shadow_r" type="float">0</shadow_r>
-          <shadow_g sid="blender_shadow_g" type="float">0</shadow_g>
-          <shadow_b sid="blender_shadow_b" type="float">0</shadow_b>
-          <energy sid="blender_energy" type="float">1</energy>
-          <dist sid="blender_dist" type="float">12.5</dist>
-          <spotsize sid="spotsize" type="float">45</spotsize>
-          <spotblend sid="spotblend" type="float">0.15</spotblend>
-          <att1 sid="att1" type="float">0</att1>
-          <att2 sid="att2" type="float">1</att2>
-          <falloff_type sid="falloff_type" type="int">2</falloff_type>
-          <clipsta sid="clipsta" type="float">0.04999995</clipsta>
-          <clipend sid="clipend" type="float">40</clipend>
-          <bias sid="bias" type="float">1</bias>
-          <soft sid="soft" type="float">3</soft>
-          <bufsize sid="bufsize" type="int">512</bufsize>
-          <samp sid="samp" type="int">3</samp>
-          <buffers sid="buffers" type="int">1</buffers>
-          <area_shape sid="area_shape" type="int">0</area_shape>
-          <area_size sid="area_size" type="float">0.125</area_size>
-          <area_sizey sid="area_sizey" type="float">0.125</area_sizey>
-          <area_sizez sid="area_sizez" type="float">0.125</area_sizez>
-        </technique>
-      </extra>
-    </light>
-  </library_lights>
   <library_images/>
   <library_geometries>
-    <geometry id="Plane_007-mesh" name="Plane.007">
-      <mesh>
-        <source id="Plane_007-mesh-positions">
-          <float_array id="Plane_007-mesh-positions-array" count="12">-1 -1 0 1 -1 0 -1 1 0 1 1 0</float_array>
-          <technique_common>
-            <accessor source="#Plane_007-mesh-positions-array" count="4" stride="3">
-              <param name="X" type="float"/>
-              <param name="Y" type="float"/>
-              <param name="Z" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Plane_007-mesh-normals">
-          <float_array id="Plane_007-mesh-normals-array" count="3">0 0 1</float_array>
-          <technique_common>
-            <accessor source="#Plane_007-mesh-normals-array" count="1" stride="3">
-              <param name="X" type="float"/>
-              <param name="Y" type="float"/>
-              <param name="Z" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Plane_007-mesh-map-0">
-          <float_array id="Plane_007-mesh-map-0-array" count="12">1 0 0 1 0 0 1 0 1 1 0 1</float_array>
-          <technique_common>
-            <accessor source="#Plane_007-mesh-map-0-array" count="6" stride="2">
-              <param name="S" type="float"/>
-              <param name="T" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <vertices id="Plane_007-mesh-vertices">
-          <input semantic="POSITION" source="#Plane_007-mesh-positions"/>
-        </vertices>
-        <triangles count="2">
-          <input semantic="VERTEX" source="#Plane_007-mesh-vertices" offset="0"/>
-          <input semantic="NORMAL" source="#Plane_007-mesh-normals" offset="1"/>
-          <input semantic="TEXCOORD" source="#Plane_007-mesh-map-0" offset="2" set="0"/>
-          <p>1 0 0 2 0 1 0 0 2 1 0 3 3 0 4 2 0 5</p>
-        </triangles>
-      </mesh>
-    </geometry>
     <geometry id="Plane_006-mesh" name="Plane.006">
       <mesh>
         <source id="Plane_006-mesh-positions">
@@ -182,14 +99,6 @@
   </library_geometries>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-      <node id="Plane" name="Plane" type="NODE">
-        <matrix sid="transform">0.5 0 0 -9.5 0 3.7749e-8 -0.5 15 0 0.5 3.7749e-8 0.5 0 0 0 1</matrix>
-        <instance_geometry url="#Plane_007-mesh" name="Plane"/>
-      </node>
-      <node id="Sun" name="Sun" type="NODE">
-        <matrix sid="transform">0.7660445 0 0.6427876 14 0 1 0 0 -0.6427876 0 0.7660445 12 0 0 0 1</matrix>
-        <instance_light url="#Sun-light"/>
-      </node>
       <node id="Perimiter_Platform" name="Perimiter_Platform" type="NODE">
         <matrix sid="transform">10 0 0 0 0 15 0 0 0 0 1 1 0 0 0 1</matrix>
         <instance_geometry url="#Plane_006-mesh" name="Perimiter_Platform"/>
