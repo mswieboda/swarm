@@ -12,7 +12,17 @@ config_version=4
 
 config/name="swarm"
 run/main_scene="res://scenes/main.tscn"
+boot_splash/image=false
 config/icon="res://icon.png"
+
+[autoload]
+
+main="*res://globals/main.gd"
+
+[display]
+
+window/size/resizable=false
+window/size/fullscreen=true
 
 [physics]
 
