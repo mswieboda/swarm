@@ -15,14 +15,16 @@ var dir = Vector3()
 var is_sprinting = false
 var camera
 var rotation_helper
-var gun : Spatial
 var gun_animation : AnimationPlayer
+var audio_gun_shot : AudioStreamPlayer3D
+var ray : RayCast
 
 func _ready():
   camera = $rotation/camera
   rotation_helper = $rotation
-  gun = $rotation/gun
   gun_animation = $rotation/gun/animation
+  ray = $rotation/gun/ray
+  audio_gun_shot = $rotation/gun/audio_gun_shot
   
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -62,7 +64,7 @@ func process_jump():
 func process_fire():
   if Input.is_action_pressed("fire") && !gun_animation.is_playing():
     gun_animation.play("default")
-    
+    audio_gun_shot.play(0.0)    
 
 func process_movement(delta):
   dir.y = 0

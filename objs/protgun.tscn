@@ -40,5 +40,5 @@ material/0 = null
 [node name="animation" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 2 )
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="audio_gun_shot" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 2 )
