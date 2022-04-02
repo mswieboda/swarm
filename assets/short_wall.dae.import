@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/short_wall.dae-4534a53dcb6122a810546d4bde08b9f0.scn"
+path="res://.import/short_Wall.dae-9f4493c6488c4b254fab73b23ba42be0.scn"
 
 [deps]
 
-source_file="res://assets/short_wall.dae"
-dest_files=[ "res://.import/short_wall.dae-4534a53dcb6122a810546d4bde08b9f0.scn" ]
+source_file="res://assets/short_Wall.dae"
+dest_files=[ "res://.import/short_Wall.dae-9f4493c6488c4b254fab73b23ba42be0.scn" ]
 
 [params]
 
