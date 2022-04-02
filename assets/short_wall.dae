@@ -5,12 +5,53 @@
       <author>Blender User</author>
       <authoring_tool>Blender 3.1.2 commit date:2022-03-31, commit time:17:40, hash:cc66d1020c3b</authoring_tool>
     </contributor>
-    <created>2022-04-01T23:56:19</created>
-    <modified>2022-04-01T23:56:19</modified>
+    <created>2022-04-02T01:04:47</created>
+    <modified>2022-04-02T01:04:47</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
-  <library_images/>
+  <library_effects>
+    <effect id="short_wall_material-effect">
+      <profile_COMMON>
+        <newparam sid="short_wall-surface">
+          <surface type="2D">
+            <init_from>short_wall</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="short_wall-sampler">
+          <sampler2D>
+            <source>short_wall-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="short_wall-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.1968912</float>
+            </reflectivity>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="short_wall" name="short_wall">
+      <init_from>short_wall.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="short_wall_material-material" name="short_wall_material">
+      <instance_effect url="#short_wall_material-effect"/>
+    </material>
+  </library_materials>
   <library_geometries>
     <geometry id="Plane-mesh" name="Plane">
       <mesh>
@@ -35,7 +76,7 @@
           </technique_common>
         </source>
         <source id="Plane-mesh-map-0">
-          <float_array id="Plane-mesh-map-0-array" count="12">1 0 0 1 0 0 1 0 1 1 0 1</float_array>
+          <float_array id="Plane-mesh-map-0-array" count="12">0 0.9999999 1 1.19209e-7 0.9999999 1 0 0.9999999 1.19209e-7 0 1 1.19209e-7</float_array>
           <technique_common>
             <accessor source="#Plane-mesh-map-0-array" count="6" stride="2">
               <param name="S" type="float"/>
@@ -46,7 +87,7 @@
         <vertices id="Plane-mesh-vertices">
           <input semantic="POSITION" source="#Plane-mesh-positions"/>
         </vertices>
-        <triangles count="2">
+        <triangles material="short_wall_material-material" count="2">
           <input semantic="VERTEX" source="#Plane-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Plane-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Plane-mesh-map-0" offset="2" set="0"/>
@@ -59,7 +100,15 @@
     <visual_scene id="Scene" name="Scene">
       <node id="Plane" name="Plane" type="NODE">
         <matrix sid="transform">0.5 0 0 0 0 1.88745e-8 -0.5 0 0 0.25 3.7749e-8 0.25 0 0 0 1</matrix>
-        <instance_geometry url="#Plane-mesh" name="Plane"/>
+        <instance_geometry url="#Plane-mesh" name="Plane">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="short_wall_material-material" target="#short_wall_material-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
       </node>
     </visual_scene>
   </library_visual_scenes>
