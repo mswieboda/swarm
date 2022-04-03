@@ -3,10 +3,13 @@ extends Spatial
 const DEFAULT_DAMAGE = 35
 const DEFAULT_AMMO_CLIP_SIZE = 30
 const DEFAULT_BULLET_SPREAD = 30
+const HEIGHT_LAYERING_RATIO = 0.01 # ray hit, extra height for texture layering
 
 export (Resource) var fire_sound
 export (Resource) var reload_sound
 export (Resource) var empty_sound
+
+export (PackedScene) var bullet_impact
 
 export var fire_animation = "default"
 export var reload_animation = "default"
@@ -88,7 +91,24 @@ func play_animation(animation, speed = 1.0):
   $AnimationPlayer.play(animation, -1, speed, false)
 
 func spawn_impact():
-  pass
+  if !ray.is_colliding():
+    return
+
+  var body = ray.get_collider()
+
+  if body is RigidBody or body is KinematicBody:
+    return
+
+  var impact = bullet_impact.instance()
+  var position = ray.get_collision_point()
+  var normal = ray.get_collision_normal()
+
+  body.add_child(impact)
+
+  impact.rotation_degrees.z = rand_range(0, 360)
+  impact.global_transform.origin = position
+  impact.global_transform.basis = perpendicular_basis_from_normal(normal)
+  impact.global_transform.origin += normal * HEIGHT_LAYERING_RATIO
 
 func spawn_shell():
   pass
@@ -143,3 +163,29 @@ func play_sound(sound, volume = 0, delay = 0, pitch = null):
   yield(get_tree().create_timer(10.0), "timeout")
 
   audio_node.queue_free()
+
+func perpendicular_basis_from_normal(normal : Vector3):
+  # find the axis with the smallest component
+  var min_ind = 0
+  var min_axis = abs(normal.x)
+
+  if abs(normal.y) < min_axis:
+    min_ind = 1
+    min_axis = abs(normal.y)
+  if abs(normal.z) < min_axis:
+    min_ind = 2
+
+  var right
+
+  # leave the minimum axis in its place,
+  # swap the other two to get a vector perpendicular to the normal vector
+  if min_ind == 0:
+    right = Vector3(normal.x, -normal.z, normal.y)
+  elif min_ind == 1:
+    right = Vector3(-normal.z, normal.y, normal.x)
+  elif min_ind == 2:
+    right = Vector3(-normal.y, normal.x, normal.z)
+
+  var up = normal.cross(right)
+
+  return Basis(right, up, normal)

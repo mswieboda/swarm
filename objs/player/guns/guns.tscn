@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/gun_shot_sound.wav" type="AudioStream" id=1]
 [ext_resource path="res://objs/player/guns/guns.gd" type="Script" id=2]
 [ext_resource path="res://objs/player/guns/machine_gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objs/player/guns/gun.gd" type="Script" id=4]
+[ext_resource path="res://objs/player/guns/bullet_impact.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFontData" id=3]
 font_path = "res://assets/Roboto-Regular.ttf"
@@ -48,6 +49,7 @@ script = ExtResource( 4 )
 fire_sound = ExtResource( 1 )
 reload_sound = ExtResource( 1 )
 empty_sound = ExtResource( 1 )
+bullet_impact = ExtResource( 5 )
 fire_animation = "fire_anim"
 reload_animation = "reload_anim"
 run_animation = "run_animation"

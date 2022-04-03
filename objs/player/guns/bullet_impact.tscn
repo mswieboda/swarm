@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objs/player/guns/bullet_impact.png" type="Texture" id=1]
+
+[node name="bullet_impact" type="Sprite3D"]
+opacity = 0.75
+pixel_size = 0.001
+texture = ExtResource( 1 )
