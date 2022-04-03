@@ -21,7 +21,6 @@ main="*res://globals/main.gd"
 [display]
 
 window/size/resizable=false
-window/size/fullscreen=true
 
 [input]
 

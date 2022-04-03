@@ -9,7 +9,6 @@
 [ext_resource path="res://objs/base/base_floor.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objs/base/supply_depot.tscn" type="PackedScene" id=8]
 
-
 [node name="base" type="Spatial"]
 
 [node name="Perimiter_Platform" parent="." instance=ExtResource( 1 )]

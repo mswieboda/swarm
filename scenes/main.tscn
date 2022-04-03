@@ -28,12 +28,12 @@ mesh = SubResource( 2 )
 material = SubResource( 3 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.306931, 0, 0, 0, 0.306931, 0, 0, 0, 0.306931, 0, 0.4771, 0 )
+transform = Transform( -0.260196, 0, 0.162803, 0, 0.306931, 0, -0.162803, 0, -0.260196, 3.57582, 0.4771, 21.0257 )
 
 [node name="enemies" type="Spatial" parent="."]
 
 [node name="crawler" parent="enemies" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.26572, 0, 33.9427 )
+transform = Transform( -0.978206, 0, 0.207639, 0, 1, 0, -0.207639, 0, -0.978206, 5.26572, 0, 21.617 )
 
 [node name="crawler2" parent="enemies" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.551878, 0, 38.04 )

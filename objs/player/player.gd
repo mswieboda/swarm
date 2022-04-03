@@ -82,7 +82,6 @@ func process_fire():
       else:
         # make bullet hole
         print(">>> shot ", collider)
-        
       
 func process_movement(delta):
   dir.y = 0
