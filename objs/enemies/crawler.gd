@@ -26,7 +26,8 @@ func set_new_target():
   var base = get_tree().get_root().find_node("supply_depot", true, false)
   target = base
 
-  look_at(target.global_transform.origin, Vector3.UP)
+  if has_target():
+    look_at(target.global_transform.origin, Vector3.UP)
 
 func has_target():
   return target != null

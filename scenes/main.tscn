@@ -2,7 +2,7 @@
 
 [ext_resource path="res://objs/base/base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objs/player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://objs/enemies/crawler.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/main.gd" type="Script" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 11.1609, 1, 12.8594 )
@@ -13,6 +13,7 @@ extents = Vector3( 11.1609, 1, 12.8594 )
 albedo_color = Color( 0.941176, 0.72549, 0.443137, 1 )
 
 [node name="world" type="Spatial"]
+script = ExtResource( 3 )
 
 [node name="base" parent="." instance=ExtResource( 1 )]
 
@@ -28,21 +29,6 @@ mesh = SubResource( 2 )
 material = SubResource( 3 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.260196, 0, 0.162803, 0, 0.306931, 0, -0.162803, 0, -0.260196, 3.57582, 0.4771, 21.0257 )
+transform = Transform( 0.305058, 0, -0.0338617, 0, 0.306931, 0, 0.0338617, 0, 0.305058, 3.57582, 0.4771, 9.29038 )
 
 [node name="enemies" type="Spatial" parent="."]
-
-[node name="crawler" parent="enemies" instance=ExtResource( 3 )]
-transform = Transform( -0.978206, 0, 0.207639, 0, 1, 0, -0.207639, 0, -0.978206, 5.26572, 0, 21.617 )
-
-[node name="crawler2" parent="enemies" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.551878, 0, 38.04 )
-
-[node name="crawler3" parent="enemies" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.85509, 0, 44.2694 )
-
-[node name="crawler4" parent="enemies" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07071, 0, 42.5128 )
-
-[node name="crawler5" parent="enemies" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.08876, 0, 38.8954 )
