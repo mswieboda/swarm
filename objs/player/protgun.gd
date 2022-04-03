@@ -15,7 +15,7 @@ var ammo = AMMO_CLIP_SIZE
 var is_reloading = false
 
 func _ready():
-  pass
+  $hud/ammo.text = str(ammo)
 
 func _physics_process(_delta):
   process_fire()
@@ -30,7 +30,7 @@ func process_fire():
         fire()
         $fire_rate_timer.start()
       else:
-        play_sound(empty_sound)
+        play_sound(empty_sound, -10, 0, rand_range(0.5, 0.55))
         $fire_rate_timer.start()
 
 func fire():
@@ -51,11 +51,12 @@ func apply_recoil():
 
 func apply_ammo():
   ammo -= 1
-  #$HUD/DisplayAmmo/AmmoText.text = str(ammo)
 
-func play_animation(animation):
+  $hud/ammo.text = str(ammo)
+
+func play_animation(animation, speed = 1.0):
   $animation.stop()
-  $animation.play(animation)
+  $animation.play("default", -1, speed, false)
 
 func spawn_impact():
   pass
@@ -77,18 +78,27 @@ func process_reload():
   if (Input.is_action_pressed("reload")):
     if !is_reloading && ammo != AMMO_CLIP_SIZE:
       is_reloading = true
-      play_sound(reload_sound)
-      play_animation(reload_animation)
-      # TODO: match with the animation
-      yield(get_tree().create_timer(1.0), "timeout")
+      # NOTE: dependent on fire animation, and sound, tweak back to normal with real sound/animation
+      play_sound(reload_sound, -5, 0, rand_range(0.5, 0.6))
+      play_sound(reload_sound, -5, 0.03, rand_range(0.5, 0.6))
+      play_animation(reload_animation, 0.3)
+      yield(get_tree().create_timer(0.5), "timeout")
+      play_sound(reload_sound, -5, 0, rand_range(0.75, 0.85))
+      play_sound(reload_sound, -5, 0.03, rand_range(0.75, 0.85))
       ammo = AMMO_CLIP_SIZE
+      $hud/ammo.text = str(ammo)
       is_reloading = false
 
-func play_sound(sound, volume = 0, delay = 0):
+func play_sound(sound, volume = 0, delay = 0, pitch = null):
   var audio_node = AudioStreamPlayer.new()
   audio_node.stream = sound
   audio_node.volume_db = volume
-  audio_node.pitch_scale = rand_range(0.95, 1.05)
+
+  if pitch == null:
+    audio_node.pitch_scale = rand_range(0.95, 1.05)
+  else:
+    audio_node.pitch_scale = pitch
+
   get_tree().get_root().add_child(audio_node)
   yield(get_tree().create_timer(delay), "timeout")
   audio_node.play()
