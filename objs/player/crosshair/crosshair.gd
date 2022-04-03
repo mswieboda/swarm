@@ -3,7 +3,7 @@ extends Node2D
 const MARGIN = 13
 const RATIO = 3
 
-onready var player = get_tree().get_root().find_node("player", true, false)
+onready var player = get_node("/root/world/player")
 var movement_speed = 0.0
 
 func _ready():
@@ -13,7 +13,7 @@ func _ready():
 
 func _process(_delta):
   movement_speed = player.inaccuracy
-  
+
   $left.position.x = clamp(-MARGIN + (movement_speed * -RATIO), -MARGIN * 2, -MARGIN)
   $top.position.y = clamp(-MARGIN + (movement_speed * -RATIO), -MARGIN * 2, -MARGIN)
   $right.position.x = clamp(MARGIN + (movement_speed * RATIO), MARGIN, MARGIN * 2)

@@ -23,8 +23,8 @@ func move_towards_target(delta):
   move_and_slide(-transform.basis.z * SPEED)
 
 func set_new_target():
-  var base = get_tree().get_root().find_node("supply_depot", true, false)
-  target = base
+  var supply_depot = get_tree().get_root().find_node("supply_depot", true, false)
+  target = supply_depot
 
   if has_target():
     look_at(target.global_transform.origin, Vector3.UP)

@@ -19,6 +19,10 @@ func take_damage(damage):
 func is_dead():
   return health <= 0
 
+func just_died():
+  # NOTE: override this in child scripts
+  pass
+
 func die():
   var dead_wall : Spatial = dead_scene.instance()
 
@@ -26,6 +30,8 @@ func die():
   dead_wall.transform.origin.y = 0
 
   get_parent().add_child(dead_wall)
+
+  just_died()
 
   get_parent().remove_child(self)
 

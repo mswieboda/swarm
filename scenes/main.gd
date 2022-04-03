@@ -8,7 +8,9 @@ const WAVE_TIMER = 5
 var wave = 0
 var wave_timer = 0
 var is_next_wave = true
+var supply_depot : Node
 var crawler_scene : PackedScene
+var is_game_over = false
 
 func _ready():
   crawler_scene = preload("res://objs/enemies/crawler.tscn")
@@ -60,14 +62,19 @@ func draw_hud():
   $hud/margin/vbox/wave.text = "wave: " + str(wave)
   $hud/margin/vbox/enemies.text = "enemies: " + str(enemies)
 
+  var info = ""
+
   if is_next_wave:
-    $hud/margin/vbox/wave_info.text = "next wave starting: " + str(WAVE_TIMER - wave_timer)
-  else:
-    $hud/margin/vbox/wave_info.text = ""
+    info = "next wave starting: " + str(WAVE_TIMER - wave_timer)
+  elif is_game_over:
+    info = "game over"
+
+  $hud/margin/vbox/info.text = info
 
 func check_end_game():
-  # TODO: check if supply_demo exists
-  pass
+  if is_game_over:
+    # TODO: start game over timer
+    pass
 
 func check_end_wave():
   var enemies = num_enemies()

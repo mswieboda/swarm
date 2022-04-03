@@ -38,7 +38,7 @@ margin_right = 68.0
 margin_bottom = 32.0
 text = "enemies X"
 
-[node name="wave_info" type="Label" parent="hud/margin/vbox"]
+[node name="info" type="Label" parent="hud/margin/vbox"]
 margin_top = 36.0
 margin_right = 68.0
 margin_bottom = 50.0
