@@ -5,16 +5,18 @@ const DEFAULT_DAMAGE = 10
 const DEFAULT_ATTACK_TIMEOUT = 0.333
 
 var health = MAX_HEALTH
-var dead_alien_scene : PackedScene
+var dead_scene : PackedScene
 var enemy_damage = DEFAULT_DAMAGE
 var attack_target : Spatial = null
 var attack_timeout = DEFAULT_ATTACK_TIMEOUT
 var attack_time = 0
 
+onready var dead_enemies = get_parent().get_parent().find_node("dead_enemies")
+
 func _ready():
   set_meta("type", "enemy")
 
-  dead_alien_scene = preload("res://objs/enemies/dead_alien.tscn")
+  dead_scene = preload("res://objs/enemies/dead_alien.tscn")
 
 func _physics_process(delta):
   attack(delta)
@@ -29,15 +31,12 @@ func is_dead():
   return health <= 0
 
 func die():
-  print(">>> enemy died")
+  var dead_enemy : Spatial = dead_scene.instance()
 
-  # spawn dead body, make this obj for removal
-  var dead_alien : Spatial = dead_alien_scene.instance()
+  dead_enemy.transform = self.transform
+  dead_enemy.transform.origin.y = 0
 
-  dead_alien.transform = self.transform
-  dead_alien.transform.origin.y = 0
-
-  get_parent().add_child(dead_alien)
+  dead_enemies.add_child(dead_enemy)
 
   get_parent().remove_child(self)
 

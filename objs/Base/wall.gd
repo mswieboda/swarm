@@ -11,7 +11,6 @@ func _ready():
   dead_scene = preload("res://objs/base/dead_wall.tscn")
 
 func take_damage(damage):
-  print(">>> wall take_damage ", damage)
   health -= damage
 
   if is_dead():
@@ -21,9 +20,6 @@ func is_dead():
   return health <= 0
 
 func die():
-  print(">>> wall died")
-
-  # spawn dead body, make this obj for removal
   var dead_wall : Spatial = dead_scene.instance()
 
   dead_wall.transform = self.transform

@@ -27,7 +27,7 @@ func _ready():
   gun_animation = $rotation/gun/animation
   ray = $rotation/gun/ray
   audio_gun_shot = $rotation/gun/audio_gun_shot
-  
+
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -69,20 +69,19 @@ func process_fire():
     gun_animation.stop()
     gun_animation.play("default")
     audio_gun_shot.play(0.0)
-    
+
     # ray cast
     ray.force_raycast_update()
-    
+
     var collider : PhysicsBody = ray.get_collider()
-    
+
     if collider:
       if collider.has_meta("type") and collider.get_meta("type") == "enemy":
-        print(">>> shot enemy! ", collider)
         collider.take_damage(GUN_DAMAGE)
       else:
         # make bullet hole
-        print(">>> shot ", collider)
-      
+        pass
+
 func process_movement(delta):
   dir.y = 0
   dir = dir.normalized()
@@ -105,7 +104,7 @@ func process_movement(delta):
   vel.x = hvel.x
   vel.z = hvel.z
   vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
-  
+
   inaccuracy = vel.length()
 
 func _input(event):
