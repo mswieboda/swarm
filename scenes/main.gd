@@ -4,17 +4,20 @@ const DISTANCE_MIN = 35
 const DISTANCE_MAX = 45
 const WAVE_ENEMY_MULTIPLIER = 5
 const WAVE_TIMER = 5
+const GAME_OVER_TIMER = 1
 
 var wave = 0
 var wave_timer = 0
+var game_over_timer = 0
 var is_next_wave = true
+var is_game_over = false
+
 var supply_depot : Node
 var crawler_scene : PackedScene
-var is_game_over = false
 
 func _ready():
   crawler_scene = preload("res://objs/enemies/crawler.tscn")
-
+  randomize()
   init_next_wave()
 
 func _physics_process(delta):
@@ -27,7 +30,7 @@ func _physics_process(delta):
     next_wave(delta)
   else:
     check_end_wave()
-    check_end_game()
+    check_end_game(delta)
 
 func spawn_enemy(scene):
   var enemy = scene.instance()
@@ -71,10 +74,15 @@ func draw_hud():
 
   $hud/margin/vbox/info.text = info
 
-func check_end_game():
-  if is_game_over:
-    # TODO: start game over timer
-    pass
+func check_end_game(delta):
+  if !is_game_over:
+    return
+
+  if game_over_timer <= GAME_OVER_TIMER:
+    game_over_timer += delta
+  else:
+    Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+    $hud/margin2/center/game_over_dialog.show()
 
 func check_end_wave():
   var enemies = num_enemies()
@@ -94,7 +102,11 @@ func next_wave(delta):
 
   is_next_wave = false
 
-  print(">>> next_wave start spawning ", wave_timer)
-
   for n in range(wave * WAVE_ENEMY_MULTIPLIER):
     spawn_enemy(crawler_scene)
+
+func _on_game_over_dialog_confirmed():
+  restart()
+
+func restart():
+  get_tree().reload_current_scene()
