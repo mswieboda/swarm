@@ -5,9 +5,9 @@ const DEFAULT_AMMO_CLIP_SIZE = 30
 const DEFAULT_BULLET_SPREAD = 30
 const HEIGHT_LAYERING_RATIO = 0.01 # ray hit, extra height for texture layering
 
-export (Resource) var fire_sound
-export (Resource) var reload_sound
-export (Resource) var empty_sound
+export (AudioStream) var fire_sound
+export (AudioStream) var reload_sound
+export (AudioStream) var empty_sound
 
 export (PackedScene) var bullet_impact
 
@@ -62,7 +62,7 @@ func process_fire():
       Input.start_joy_vibration(0, 0, 0.2, 0.1)
     fire()
   else:
-    play_sound(empty_sound, -10, 0, rand_range(0.5, 0.55))
+    play_sound(empty_sound)
 
   $fire_rate_timer.start()
 
@@ -129,14 +129,10 @@ func process_reload():
 
   is_reloading = true
 
-  play_sound(reload_sound, -5, 0, rand_range(0.5, 0.6))
-  play_sound(reload_sound, -5, 0.03, rand_range(0.5, 0.6))
+  play_sound(reload_sound, 13)
   play_animation(reload_animation)
 
   yield(get_tree().create_timer(0.5), "timeout")
-
-  play_sound(reload_sound, -5, 0, rand_range(0.75, 0.85))
-  play_sound(reload_sound, -5, 0.03, rand_range(0.75, 0.85))
 
   ammo = ammo_clip_size
 
