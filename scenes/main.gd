@@ -3,23 +3,29 @@ extends Spatial
 const DISTANCE_MIN = 35
 const DISTANCE_MAX = 45
 const WAVE_ENEMY_MULTIPLIER = 5
+const WAVE_TIMER = 5
 
 var wave = 0
+var wave_timer = 0
+var is_next_wave = true
 var crawler_scene : PackedScene
 
 func _ready():
   crawler_scene = preload("res://objs/enemies/crawler.tscn")
 
-  next_wave()
+  init_next_wave()
 
-func _physics_process(_delta):
+func _physics_process(delta):
   if Input.is_action_just_pressed("spawn"):
     spawn_enemy(crawler_scene)
 
   draw_hud()
 
-  check_end_wave()
-  check_end_game()
+  if is_next_wave:
+    next_wave(delta)
+  else:
+    check_end_wave()
+    check_end_game()
 
 func spawn_enemy(scene):
   var enemy = scene.instance()
@@ -54,6 +60,11 @@ func draw_hud():
   $hud/margin/vbox/wave.text = "wave: " + str(wave)
   $hud/margin/vbox/enemies.text = "enemies: " + str(enemies)
 
+  if is_next_wave:
+    $hud/margin/vbox/wave_info.text = "next wave starting: " + str(WAVE_TIMER - wave_timer)
+  else:
+    $hud/margin/vbox/wave_info.text = ""
+
 func check_end_game():
   # TODO: check if supply_demo exists
   pass
@@ -62,10 +73,21 @@ func check_end_wave():
   var enemies = num_enemies()
 
   if enemies <= 0:
-    next_wave()
+    init_next_wave()
 
-func next_wave():
+func init_next_wave():
+  is_next_wave = true
   wave += 1
+  wave_timer = 0
+
+func next_wave(delta):
+  if wave_timer <= WAVE_TIMER:
+    wave_timer += delta
+    return
+
+  is_next_wave = false
+
+  print(">>> next_wave start spawning ", wave_timer)
 
   for n in range(wave * WAVE_ENEMY_MULTIPLIER):
     spawn_enemy(crawler_scene)

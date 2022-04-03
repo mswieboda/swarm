@@ -25,7 +25,7 @@ margin_bottom = 40.0
 
 [node name="vbox" type="VBoxContainer" parent="hud/margin"]
 margin_right = 68.0
-margin_bottom = 35.0
+margin_bottom = 50.0
 
 [node name="wave" type="Label" parent="hud/margin/vbox"]
 margin_right = 68.0
@@ -37,6 +37,11 @@ margin_top = 18.0
 margin_right = 68.0
 margin_bottom = 32.0
 text = "enemies X"
+
+[node name="wave_info" type="Label" parent="hud/margin/vbox"]
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 50.0
 
 [node name="base" parent="." instance=ExtResource( 1 )]
 
