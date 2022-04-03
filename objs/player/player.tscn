@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objs/player/player.gd" type="Script" id=1]
-[ext_resource path="res://objs/player/protgun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objs/player/guns/guns.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objs/player/crosshair/crosshair.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -27,8 +27,8 @@ fov = 90.0
 
 [node name="crosshair" parent="rotation/camera" instance=ExtResource( 3 )]
 
-[node name="gun" parent="rotation" instance=ExtResource( 2 )]
-transform = Transform( -0.75, 0, -1.13247e-07, 0, 0.75, 0, 1.13247e-07, 0, -0.75, -0.38093, -0.250044, 1.19603 )
+[node name="guns" parent="rotation" instance=ExtResource( 2 )]
+transform = Transform( -0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, 0, 0, 0 )
 
 [node name="feet" type="RayCast" parent="."]
 enabled = true
