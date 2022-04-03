@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/crawler.dae-e248ef72b059ff44c670261a1fb8a513.scn"
+path="res://.import/crawler.glb-2406840c516ae993bae3c3ceaf972865.scn"
 
 [deps]
 
-source_file="res://assets/enemies/crawler/crawler.dae"
-dest_files=[ "res://.import/crawler.dae-e248ef72b059ff44c670261a1fb8a513.scn" ]
+source_file="res://assets/enemies/crawler/crawler.glb"
+dest_files=[ "res://.import/crawler.glb-2406840c516ae993bae3c3ceaf972865.scn" ]
 
 [params]
 
@@ -31,8 +31,8 @@ external_files/store_in_subdir=false
 animation/import=true
 animation/fps=15
 animation/filter_script=""
-animation/storage=2
-animation/keep_custom_tracks=true
+animation/storage=false
+animation/keep_custom_tracks=false
 animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01
