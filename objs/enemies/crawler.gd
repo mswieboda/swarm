@@ -7,20 +7,18 @@ var target : Spatial = null
 
 func _ready():
   enemy_damage = CRAWLER_DAMAGE
+  dead_scene = preload("res://objs/enemies/dead_crawler.tscn")
 
 func _physics_process(delta):
   if has_target():
-    if !is_attacking():
-      if target.is_dead():
-        var x = 1
-      else:
-        move_towards_target(delta)
+    if !is_attacking() and !target.is_dead():
+      move_towards_target(delta)
   else:
     set_new_target()
 
-func move_towards_target(delta):
+func move_towards_target(_delta):
   $animation.play("crawling_action")
-  move_and_slide(-transform.basis.z * SPEED)
+  var _v = move_and_slide(-transform.basis.z * SPEED)
 
 func set_new_target():
   var supply_depot = get_tree().get_root().find_node("supply_depot", true, false)

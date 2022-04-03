@@ -101,7 +101,7 @@ surfaces/0 = {
 "vertex_count": 3904
 }
 
-[node name="dead_alien" type="Spatial"]
+[node name="dead_crawler" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="RigidBody" type="RigidBody" parent="."]
