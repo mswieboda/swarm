@@ -9,7 +9,6 @@ const MAX_SLOPE_ANGLE = 40
 const MOUSE_SENSITIVITY = 0.05
 const MAX_SPRINT_SPEED = 20
 const SPRINT_ACCEL = 18
-const GUN_DAMAGE = 35
 
 var vel = Vector3()
 var dir = Vector3()
@@ -17,16 +16,10 @@ var is_sprinting = false
 var inaccuracy = 0.0
 var camera
 var rotation_helper
-var gun_animation : AnimationPlayer
-var audio_gun_shot : AudioStreamPlayer3D
-var ray : RayCast
 
 func _ready():
   camera = $rotation/camera
   rotation_helper = $rotation
-  gun_animation = $rotation/gun/animation
-  ray = $rotation/gun/ray
-  audio_gun_shot = $rotation/gun/audio_gun_shot
 
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -38,7 +31,6 @@ func _physics_process(delta):
 func process_input(_delta):
   process_walk_direction()
   process_jump()
-  process_fire()
 
 func process_walk_direction():
   dir = Vector3()
@@ -62,25 +54,6 @@ func process_walk_direction():
 func process_jump():
   if Input.is_action_pressed("jump") and is_on_floor():
     vel.y = JUMP_SPEED
-
-func process_fire():
-  if Input.is_action_just_pressed("fire"):
-    # TODO: add inaccuracy after firing, and slowly regain accurracy back over time
-    gun_animation.stop()
-    gun_animation.play("default")
-    audio_gun_shot.play(0.0)
-
-    # ray cast
-    ray.force_raycast_update()
-
-    var collider : PhysicsBody = ray.get_collider()
-
-    if collider:
-      if collider.has_meta("type") and collider.get_meta("type") == "enemy":
-        collider.take_damage(GUN_DAMAGE)
-      else:
-        # make bullet hole
-        pass
 
 func process_movement(delta):
   dir.y = 0
