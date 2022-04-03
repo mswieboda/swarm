@@ -4,6 +4,17 @@
 [ext_resource path="res://assets/gun_shot_sound.wav" type="AudioStream" id=2]
 [ext_resource path="res://objs/player/protgun.gd" type="Script" id=3]
 
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.208333
+tracks/0/type = "transform"
+tracks/0/path = NodePath("mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray( 0.0416666, 1, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.1, 1, 0.125, 1, 0, 0, 0.19918, 0, 0, 0, 1, 0.1, 0.1, 1, 0.208333, 1, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.1, 1 )
+
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
 surfaces/0 = {
@@ -20,24 +31,19 @@ surfaces/0 = {
 "vertex_count": 490
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "default"
-length = 0.208333
-tracks/0/type = "transform"
-tracks/0/path = NodePath("mesh")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0.0416666, 1, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.1, 1, 0.125, 1, 0, 0, 0.19918, 0, 0, 0, 1, 0.1, 0.1, 1, 0.208333, 1, 0, 0, 0, 0, 0, 0, 1, 0.1, 0.1, 1 )
-
 [node name="protgun" type="Spatial"]
 script = ExtResource( 3 )
+fire_sound = ExtResource( 2 )
+reload_sound = ExtResource( 2 )
+empty_sound = ExtResource( 2 )
 
-[node name="mesh" type="MeshInstance" parent="."]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0.0199173 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="bullet_spread" type="Position3D" parent="."]
+
+[node name="ray" type="RayCast" parent="bullet_spread"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0491878, -0.985613 )
+enabled = true
+cast_to = Vector3( 0, 0, -300 )
+collision_mask = 7
 
 [node name="animation" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 2 )
@@ -45,7 +51,15 @@ anims/default = SubResource( 2 )
 [node name="audio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 2 )
 
-[node name="ray" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0491878, -0.985613 )
-cast_to = Vector3( 0, 0, -300 )
-collision_mask = 7
+[node name="mesh" type="MeshInstance" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0.0199173 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="fire_rate_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="recoil_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
