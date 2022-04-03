@@ -1,4 +1,4 @@
-extends RigidBody
+extends PhysicsBody
 
 const MAX_HEALTH = 100
 
@@ -8,7 +8,7 @@ var dead_alien_scene : PackedScene
 func _ready():  
   set_meta("type", "enemy")
   
-  dead_alien_scene = preload("res://objs/dead_alien.tscn")
+  dead_alien_scene = preload("res://objs/enemies/dead_alien.tscn")
 
 func take_damage(damage):
   health -= damage
@@ -17,7 +17,7 @@ func take_damage(damage):
     die()
 
 func die():
-  print(">>> alien died")
+  print(">>> enemy died")
   
   # spawn dead body, make this obj for removal
   var dead_alien : Spatial = dead_alien_scene.instance()
