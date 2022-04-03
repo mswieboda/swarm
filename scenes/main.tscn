@@ -20,40 +20,38 @@ script = ExtResource( 3 )
 [node name="margin" type="MarginContainer" parent="hud"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
 
 [node name="vbox" type="VBoxContainer" parent="hud/margin"]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1019.0
+margin_bottom = 595.0
 
 [node name="wave" type="Label" parent="hud/margin/vbox"]
-margin_right = 1024.0
+margin_right = 1019.0
 margin_bottom = 14.0
 text = "wave X"
 
 [node name="enemies" type="Label" parent="hud/margin/vbox"]
 margin_top = 18.0
-margin_right = 1024.0
+margin_right = 1019.0
 margin_bottom = 32.0
 text = "enemies X"
 
 [node name="info" type="Label" parent="hud/margin/vbox"]
 margin_top = 36.0
-margin_right = 1024.0
+margin_right = 1019.0
 margin_bottom = 50.0
 
-[node name="margin2" type="MarginContainer" parent="hud"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="center" type="CenterContainer" parent="hud/margin"]
+margin_right = 1019.0
+margin_bottom = 595.0
 
-[node name="center" type="CenterContainer" parent="hud/margin2"]
-margin_right = 1024.0
-margin_bottom = 600.0
-
-[node name="game_over_dialog" type="ConfirmationDialog" parent="hud/margin2/center"]
-margin_left = 412.0
-margin_top = 265.0
-margin_right = 612.0
-margin_bottom = 335.0
+[node name="game_over_dialog" type="ConfirmationDialog" parent="hud/margin/center"]
+margin_left = 409.0
+margin_top = 262.0
+margin_right = 609.0
+margin_bottom = 332.0
 window_title = "Game Over"
 dialog_text = "Do you want to restart?"
 
@@ -77,4 +75,4 @@ transform = Transform( 0.305058, 0, -0.0338617, 0, 0.306931, 0, 0.0338617, 0, 0.
 
 [node name="dead_enemies" type="Spatial" parent="."]
 
-[connection signal="confirmed" from="hud/margin2/center/game_over_dialog" to="." method="_on_game_over_dialog_confirmed"]
+[connection signal="confirmed" from="hud/margin/center/game_over_dialog" to="." method="_on_game_over_dialog_confirmed"]

@@ -12,7 +12,7 @@ var game_over_timer = 0
 var is_next_wave = true
 var is_game_over = false
 
-var supply_depot : Node
+onready var supply_depot = get_node("base/supply_depot")
 var crawler_scene : PackedScene
 
 func _ready():
@@ -71,6 +71,8 @@ func draw_hud():
     info = "next wave starting: " + str(WAVE_TIMER - wave_timer)
   elif is_game_over:
     info = "game over"
+  else:
+    info = "base health: " + str(supply_depot.health)
 
   $hud/margin/vbox/info.text = info
 
@@ -82,7 +84,7 @@ func check_end_game(delta):
     game_over_timer += delta
   else:
     Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-    $hud/margin2/center/game_over_dialog.show()
+    $hud/margin/center/game_over_dialog.show()
 
 func check_end_wave():
   var enemies = num_enemies()
