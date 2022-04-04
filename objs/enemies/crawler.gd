@@ -32,3 +32,6 @@ func has_target():
 
 func do_attack_animation():
   $animation.play("hitting_action")
+
+func took_damage():
+  $audio_hit.play()

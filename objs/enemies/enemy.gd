@@ -11,6 +11,7 @@ var attack_target : Spatial = null
 var attack_timeout = DEFAULT_ATTACK_TIMEOUT
 var attack_time = 0
 
+onready var audio_hit = $audio_hit
 onready var dead_enemies = get_parent().get_parent().find_node("dead_enemies")
 
 func _ready():
@@ -23,6 +24,8 @@ func _physics_process(delta):
 
 func take_damage(damage):
   health -= damage
+
+  took_damage()
 
   if is_dead():
     die()
@@ -51,6 +54,10 @@ func stop_attacking():
   attack_time = 0
 
 func do_attack_animation():
+  # NOTE: override in child script
+  pass
+
+func took_damage():
   # NOTE: override in child script
   pass
 
