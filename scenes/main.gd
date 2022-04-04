@@ -118,7 +118,7 @@ func check_end_game(delta):
     Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
     $hud/margin/center/game_over_dialog.show()
 
-func check_end_wave(delta):
+func check_end_wave(_delta):
   if num_enemies <= 0:
     end_wave()
 
@@ -163,6 +163,13 @@ func process_placing():
 
   if wave_unit_placements >= max_wave_unit_placements:
     # TODO: add messaging saying they can't place any more units
+    $player/audio_placement_error.play()
+    return
+
+  var area : Area = $base/platform/area
+
+  if !area.overlaps_body($player):
+    # TODO: add messaging saying they can't place units here
     $player/audio_placement_error.play()
     return
 
