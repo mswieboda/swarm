@@ -19,6 +19,7 @@ var is_wave_started = false
 var is_game_over = false
 
 onready var supply_depot = get_node("base/supply_depot")
+
 var crawler_scene : PackedScene
 
 func _ready():
@@ -30,6 +31,7 @@ func _ready():
 
 func _physics_process(delta):
   if Input.is_action_just_pressed("start"):
+    $player.disable_placing()
     is_wave_started = true
 
   check_num_enemies()
@@ -137,6 +139,8 @@ func end_wave():
   wave += 1
   wave_time = 0
   wave_interval_time = 0
+
+  $player.enable_placing()
 
 func next_wave():
   for _n in range(wave * WAVE_ENEMY_MULTIPLIER):

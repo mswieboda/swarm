@@ -14,3 +14,15 @@ func _physics_process(_delta):
 
 func update_hud_ammo(ammo):
   $hud/ammo.text = str(ammo)
+
+func enable():
+  show()
+  $crosshair.show()
+  $hud/ammo.show()
+  gun.enable()
+
+func disable():
+  hide()
+  $crosshair.hide()
+  $hud/ammo.hide()
+  gun.disable()

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://objs/player/player.gd" type="Script" id=1]
 [ext_resource path="res://objs/player/guns/guns.tscn" type="PackedScene" id=2]
-[ext_resource path="res://objs/player/crosshair/crosshair.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sounds/mag_empty.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/foot_steps.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -26,8 +26,6 @@ doppler_tracking = 2
 current = true
 fov = 90.0
 
-[node name="crosshair" parent="rotation/camera" instance=ExtResource( 3 )]
-
 [node name="guns" parent="rotation" instance=ExtResource( 2 )]
 transform = Transform( -0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, 0, 0, 0 )
 
@@ -39,3 +37,6 @@ cast_to = Vector3( 0, -2.2, 0 )
 stream = ExtResource( 4 )
 unit_db = -15.0
 unit_size = 0.5
+
+[node name="audio_placement" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )

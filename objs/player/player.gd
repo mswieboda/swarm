@@ -13,6 +13,7 @@ const SPRINT_ACCEL = 18
 var vel = Vector3()
 var dir = Vector3()
 var is_sprinting = false
+var is_placing = false
 var inaccuracy = 0.0
 var camera
 var rotation_helper
@@ -31,6 +32,7 @@ func _physics_process(delta):
 func process_input():
   process_walk_direction()
   process_jump()
+  process_placement()
 
 func process_walk_direction():
   dir = Vector3()
@@ -59,6 +61,13 @@ func process_walk_direction():
 func process_jump():
   if Input.is_action_pressed("jump") and is_on_floor():
     vel.y = JUMP_SPEED
+
+func process_placement():
+  if !is_placing:
+    return
+
+  if Input.is_action_just_pressed("placement"):
+    $audio_placement.play()
 
 func process_movement(delta):
   dir.y = 0
@@ -99,4 +108,12 @@ func play_footsteps():
     return
 
   $audio_footsteps.pitch_scale = rand_range(0.75, 0.95)
-  $audio_footsteps.play(0.0)
+  $audio_footsteps.play()
+
+func enable_placing():
+  is_placing = true
+  $rotation/guns.disable()
+
+func disable_placing():
+  is_placing = false
+  $rotation/guns.enable()
