@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objs/player/player.gd" type="Script" id=1]
 [ext_resource path="res://objs/player/guns/guns.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sounds/mag_empty.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/foot_steps.wav" type="AudioStream" id=4]
+[ext_resource path="res://objs/units/soldier.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 1.02217
@@ -11,12 +12,14 @@ height = 1.02217
 [node name="player" type="KinematicBody"]
 input_ray_pickable = false
 script = ExtResource( 1 )
+soldier_scene = ExtResource( 5 )
 
 [node name="collision" type="CollisionShape" parent="."]
-transform = Transform( 0.307, 0, 0, 0, -1.34194e-08, 0.307, 0, -0.307, -1.34194e-08, 0, 0, 0 )
+transform = Transform( 0.307, 0, 0, 0, -1.34194e-08, 0.307, 0, -0.307, -1.34194e-08, 0, 0.528057, 0 )
 shape = SubResource( 1 )
 
 [node name="rotation" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528057, 0 )
 
 [node name="camera" type="Camera" parent="rotation"]
 transform = Transform( -1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, 0, 0.307, 0 )

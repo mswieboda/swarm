@@ -10,6 +10,8 @@ const MOUSE_SENSITIVITY = 0.05
 const MAX_SPRINT_SPEED = 20
 const SPRINT_ACCEL = 18
 
+export (PackedScene) var soldier_scene
+
 var vel = Vector3()
 var dir = Vector3()
 var is_sprinting = false
@@ -68,6 +70,13 @@ func process_placement():
 
   if Input.is_action_just_pressed("placement"):
     $audio_placement.play()
+    var soldier : Spatial = soldier_scene.instance()
+
+    soldier.global_transform = global_transform
+
+    soldier.rotate_y(deg2rad(180))
+
+    get_parent().get_node("units").add_child(soldier)
 
 func process_movement(delta):
   dir.y = 0
