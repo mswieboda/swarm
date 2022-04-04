@@ -88,3 +88,4 @@ anims/walk_anim = SubResource( 6 )
 
 [node name="muzzle_flash" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.292337, 0.0170026, 0 )
+visible = false
