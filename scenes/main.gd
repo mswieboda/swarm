@@ -88,10 +88,10 @@ func draw_hud():
 
   if is_game_over:
     info = "game over"
-  else:
-    info = "base health: " + str(supply_depot.health)
 
   $hud/margin/vbox/info.text = info
+  $hud/margin/base_health/vbox/bar/value.text = "%d%%" % supply_depot.health
+  $hud/margin/base_health/vbox/bar/health.margin_left = (100 - supply_depot.health) * 3
 
 func show_time(time):
   var mins = floor(time / 60)
