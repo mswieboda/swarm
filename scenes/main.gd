@@ -6,7 +6,6 @@ const WAVE_ENEMY_MULTIPLIER = 2
 const WAVE_SPAWNS_PER_INTERVAL = 1
 const WAVE_SPAWN_INTERVAL = 1 * 60
 const WAVE_TIMER = 5 * 60
-const WAVE_WAIT_TIMER = 5
 const GAME_OVER_TIMER = 1
 
 var wave = 0
@@ -15,7 +14,8 @@ var wave_interval_time = 0
 var wave_wait_time = 0
 var game_over_time = 0
 var num_enemies = 0
-var is_next_wave = true
+var is_wave_ended = false
+var is_wave_started = false
 var is_game_over = false
 
 onready var supply_depot = get_node("base/supply_depot")
@@ -24,18 +24,21 @@ var crawler_scene : PackedScene
 func _ready():
   crawler_scene = preload("res://objs/enemies/crawler.tscn")
   randomize()
-  init_next_wave()
+  end_wave()
+  # TODO: implement a timer to start the first wave automatically
+  # is_wave_started = true
 
 func _physics_process(delta):
-  if Input.is_action_just_pressed("spawn"):
-    spawn_enemy(crawler_scene)
+  if Input.is_action_just_pressed("start"):
+    is_wave_started = true
 
   check_num_enemies()
 
   draw_hud()
 
-  if is_next_wave:
-    next_wave(delta)
+  if is_wave_ended:
+    if is_wave_started:
+      next_wave(delta)
   else:
     check_wave_spawns(delta)
     check_end_wave(delta)
@@ -75,8 +78,8 @@ func draw_hud():
   var wave_info = ""
   var info = ""
 
-  if is_next_wave:
-    wave_info = "next wave starting: " + show_time(WAVE_WAIT_TIMER - wave_wait_time)
+  if is_wave_ended:
+    wave_info = "wave ended, make preparations and press ENTER to start"
   else:
     wave_info = "wave lasts: " + show_time(WAVE_TIMER - wave_time)
     wave_info += " next enemy in: " + show_time(wave_interval_timer() - wave_interval_time)
@@ -113,9 +116,9 @@ func check_end_game(delta):
 
 func check_end_wave(delta):
   if num_enemies <= 0:
-    init_next_wave()
+    end_wave()
   elif wave_time >= WAVE_TIMER:
-    init_next_wave()
+    end_wave()
   else:
     wave_time += delta
 
@@ -129,22 +132,18 @@ func check_wave_spawns(delta):
   else:
     wave_interval_time += delta
 
-func init_next_wave():
-  is_next_wave = true
+func end_wave():
+  is_wave_ended = true
   wave += 1
   wave_time = 0
-  wave_wait_time = 0
   wave_interval_time = 0
 
 func next_wave(delta):
-  if wave_wait_time <= WAVE_WAIT_TIMER:
-    wave_wait_time += delta
-    return
-
-  is_next_wave = false
-
   for _n in range(wave * WAVE_ENEMY_MULTIPLIER):
     spawn_enemy(crawler_scene)
+
+  is_wave_ended = false
+  is_wave_started = false
 
 func _on_game_over_dialog_confirmed():
   restart()
