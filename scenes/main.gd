@@ -38,7 +38,7 @@ func _physics_process(delta):
 
   if is_wave_ended:
     if is_wave_started:
-      next_wave(delta)
+      next_wave()
   else:
     check_wave_spawns(delta)
     check_end_wave(delta)
@@ -72,8 +72,8 @@ func check_num_enemies():
   num_enemies = $enemies.get_child_count()
 
 func draw_hud():
-  $hud/margin/vbox/wave.text = "wave: " + str(wave)
-  $hud/margin/vbox/enemies.text = "enemies: " + str(num_enemies)
+  $hud/margin/vbox/wave.text = "wave %s" % wave
+  $hud/margin/vbox/enemies.text = "enemies: %d" % num_enemies
 
   var wave_info = ""
   var info = ""
@@ -138,7 +138,7 @@ func end_wave():
   wave_time = 0
   wave_interval_time = 0
 
-func next_wave(delta):
+func next_wave():
   for _n in range(wave * WAVE_ENEMY_MULTIPLIER):
     spawn_enemy(crawler_scene)
 
