@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/sounds/mag_empty.wav" type="AudioStream" id=1]
 [ext_resource path="res://objs/player/guns/guns.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://objs/player/guns/bullet_impact.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sounds/reload_sound.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/sounds/gun_shot.wav" type="AudioStream" id=7]
-[ext_resource path="res://objs/player/crosshair/crosshair.gd" type="Script" id=8]
 [ext_resource path="res://objs/player/crosshair/crosshair.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFontData" id=3]
@@ -23,8 +22,7 @@ default_font = SubResource( 4 )
 [node name="guns" type="Spatial"]
 script = ExtResource( 2 )
 
-[node name="crosshair" type="Node2D" parent="." instance=ExtResource( 9 )]
-script = ExtResource( 8 )
+[node name="crosshair" parent="." instance=ExtResource( 9 )]
 
 [node name="bullet_spread" type="Position3D" parent="."]
 
