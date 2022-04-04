@@ -14,7 +14,7 @@ export (PackedScene) var bullet_impact
 export var fire_animation = "default"
 export var reload_animation = "default"
 export var run_animation = "default"
-export var run_transition_animation = "default"
+export var run_transition = "default"
 export var walk_animation = "default"
 
 export var damage = DEFAULT_DAMAGE

@@ -26,3 +26,15 @@ func disable():
   $crosshair.hide()
   $hud/ammo.hide()
   gun.disable()
+
+func play_walk_animation():
+  gun.get_node("AnimationPlayer").play(gun.walk_animation)
+
+func play_run_transition():
+  gun.get_node("AnimationPlayer").play(gun.run_transition)
+
+func play_run_animation():
+  gun.get_node("AnimationPlayer").play(gun.run_animation)
+
+func play_walk_transition():
+  gun.get_node("AnimationPlayer").play_backwards(gun.run_transition)

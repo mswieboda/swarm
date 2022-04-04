@@ -11,7 +11,6 @@ var attack_target : Spatial = null
 var attack_timeout = DEFAULT_ATTACK_TIMEOUT
 var attack_time = 0
 
-onready var audio_hit = $audio_hit
 onready var dead_enemies = get_parent().get_parent().find_node("dead_enemies")
 
 func _ready():

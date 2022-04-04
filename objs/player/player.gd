@@ -20,6 +20,8 @@ var inaccuracy = 0.0
 var camera
 var rotation_helper
 
+onready var guns = $rotation/camera/guns
+
 func _ready():
   camera = $rotation/camera
   rotation_helper = $rotation
@@ -39,6 +41,7 @@ func process_input():
 
 func process_sprint():
   if !is_sprinting and Input.is_action_just_pressed("sprint"):
+    guns.play_run_transition()
     is_sprinting = true
     $sprint_timer.start()
 
@@ -57,11 +60,17 @@ func process_walk_direction():
     input_movement_vector.x += 1
 
   if input_movement_vector.x != 0 or input_movement_vector.y != 0:
+    if is_sprinting:
+      guns.play_run_animation()
+    else:
+      guns.play_walk_animation()
+
     play_footsteps()
   else:
     $audio_footsteps.stop()
 
-  if input_movement_vector.y == 0:
+  if is_sprinting and input_movement_vector.y == 0:
+    guns.play_walk_transition()
     is_sprinting = false
     $sprint_timer.stop()
 
@@ -144,7 +153,7 @@ func disable_placing():
   is_placing = false
   $rotation/camera/guns.enable()
 
-
 func _on_sprint_timer_timeout():
+  guns.play_walk_transition()
   is_sprinting = false
 

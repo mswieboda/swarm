@@ -58,7 +58,7 @@ bullet_impact = ExtResource( 5 )
 fire_animation = "fire_anim"
 reload_animation = "reload_anim"
 run_animation = "run_animation"
-run_transition_animation = "run_transition"
+run_transition = "run_transition"
 walk_animation = "walk_anim"
 
 [node name="fire_rate_timer" type="Timer" parent="guns/machine_gun"]
