@@ -25,10 +25,10 @@ func _ready():
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
-  process_input(delta)
+  process_input()
   process_movement(delta)
 
-func process_input(_delta):
+func process_input():
   process_walk_direction()
   process_jump()
 
@@ -45,6 +45,11 @@ func process_walk_direction():
     input_movement_vector.x -= 1
   if Input.is_action_pressed("strafe_right"):
     input_movement_vector.x += 1
+
+  if input_movement_vector.x != 0 or input_movement_vector.y != 0:
+    play_footsteps()
+  else:
+    $audio_footsteps.stop()
 
   input_movement_vector = input_movement_vector.normalized()
 
@@ -88,3 +93,10 @@ func _input(event):
     var camera_rot = rotation_helper.rotation_degrees
     camera_rot.x = clamp(camera_rot.x, -80, 80)
     rotation_helper.rotation_degrees = camera_rot
+
+func play_footsteps():
+  if $audio_footsteps.playing:
+    return
+
+  $audio_footsteps.pitch_scale = rand_range(0.75, 0.95)
+  $audio_footsteps.play(0.0)
