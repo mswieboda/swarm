@@ -1,14 +1,14 @@
 extends KinematicBody
 
 const GRAVITY = -32.8
-const MAX_SPEED = 10
+const MAX_SPEED = 5
 const JUMP_SPEED = 12
 const ACCEL = 4.5
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
 const MOUSE_SENSITIVITY = 0.05
-const MAX_SPRINT_SPEED = 20
-const SPRINT_ACCEL = 18
+const MAX_SPRINT_SPEED = 10
+const SPRINT_ACCEL = 9
 
 export (PackedScene) var soldier_scene
 
@@ -32,9 +32,15 @@ func _physics_process(delta):
   process_movement(delta)
 
 func process_input():
+  process_sprint()
   process_walk_direction()
   process_jump()
   process_placement()
+
+func process_sprint():
+  if !is_sprinting and Input.is_action_just_pressed("sprint"):
+    is_sprinting = true
+    $sprint_timer.start()
 
 func process_walk_direction():
   dir = Vector3()
@@ -54,6 +60,10 @@ func process_walk_direction():
     play_footsteps()
   else:
     $audio_footsteps.stop()
+
+  if input_movement_vector.y == 0:
+    is_sprinting = false
+    $sprint_timer.stop()
 
   input_movement_vector = input_movement_vector.normalized()
 
@@ -88,11 +98,18 @@ func process_movement(delta):
   hvel.y = 0
 
   var target = dir
-  target *= MAX_SPEED
+
+  if is_sprinting:
+    target *= MAX_SPRINT_SPEED
+  else:
+    target *= MAX_SPEED
 
   var accel
   if dir.dot(hvel) > 0:
-    accel = ACCEL
+    if is_sprinting:
+      accel = SPRINT_ACCEL
+    else:
+      accel = ACCEL
   else:
     accel = DEACCEL
 
@@ -126,3 +143,8 @@ func enable_placing():
 func disable_placing():
   is_placing = false
   $rotation/camera/guns.enable()
+
+
+func _on_sprint_timer_timeout():
+  is_sprinting = false
+

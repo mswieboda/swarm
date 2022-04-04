@@ -42,3 +42,9 @@ unit_size = 0.5
 
 [node name="audio_placement" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="sprint_timer" type="Timer" parent="."]
+wait_time = 0.69
+one_shot = true
+
+[connection signal="timeout" from="sprint_timer" to="." method="_on_sprint_timer_timeout"]
