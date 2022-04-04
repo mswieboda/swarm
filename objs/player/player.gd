@@ -17,7 +17,6 @@ var vel = Vector3()
 var dir = Vector3()
 var is_sprinting = false
 var is_placing = false
-var is_debug_disabled = false
 var inaccuracy = 0.0
 var camera
 var rotation_helper
@@ -30,6 +29,7 @@ func _ready():
 
   if is_disabled:
     camera.current = false
+    guns.disable()
 
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -162,7 +162,9 @@ func enable_placing():
 
 func disable_placing():
   is_placing = false
-  $rotation/camera/guns.enable()
+
+  if !is_disabled:
+    $rotation/camera/guns.enable()
 
 func _on_sprint_timer_timeout():
   guns.play_walk_transition()
