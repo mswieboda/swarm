@@ -26,7 +26,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, -0.06, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0833333, 1, -0.1, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
+tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, -0.04, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0833333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "reload_anim"
