@@ -3,7 +3,7 @@ extends KinematicBody
 const GRAVITY = -32.8
 const MAX_SPEED = 5
 const JUMP_SPEED = 7
-const LADDER_SPEED = 3
+const LADDER_SPEED = 2.69
 const ACCEL = 4.5
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
@@ -60,13 +60,16 @@ func process_walk_direction():
   var cam_xform = camera.get_global_transform()
   var input_movement_vector = Vector2()
 
+  if can_climb_ladder:
+    vel.y = 0
+
   if Input.is_action_pressed("forward"):
     if can_climb_ladder:
       vel.y = LADDER_SPEED
     else:
       input_movement_vector.y += 1
   if Input.is_action_pressed("back"):
-    if can_climb_ladder:
+    if can_climb_ladder and !is_on_floor():
       vel.y = -LADDER_SPEED
     else:
       input_movement_vector.y -= 1
@@ -117,7 +120,7 @@ func process_movement(delta):
   dir.y = 0
   dir = dir.normalized()
 
-  if !is_on_floor():
+  if !is_on_floor() and !can_climb_ladder:
     vel.y += delta * GRAVITY
 
   var hvel = vel
