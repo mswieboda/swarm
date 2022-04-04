@@ -49,7 +49,7 @@ valign = 2
 [node name="guns" type="Position3D" parent="."]
 
 [node name="machine_gun" parent="guns" instance=ExtResource( 3 )]
-transform = Transform( -0.0226874, 0, 0.999742, 0, 1, 0, -0.999743, 0, -0.0226874, 1.15678, -0.797626, -2.50962 )
+transform = Transform( -0.0384494, 0.000509333, 0.99926, 0.0322747, 0.999479, 0.000732417, -0.99874, 0.032279, -0.0384458, 0.224981, 0.165349, -0.443997 )
 script = ExtResource( 4 )
 fire_sound = ExtResource( 7 )
 reload_sound = ExtResource( 6 )

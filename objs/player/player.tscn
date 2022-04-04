@@ -13,21 +13,20 @@ input_ray_pickable = false
 script = ExtResource( 1 )
 
 [node name="collision" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
+transform = Transform( 0.307, 0, 0, 0, -1.34194e-08, 0.307, 0, -0.307, -1.34194e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="rotation" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="camera" type="Camera" parent="rotation"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, 0, 0.307, 0 )
 keep_aspect = 0
 doppler_tracking = 2
 current = true
 fov = 90.0
 
 [node name="guns" parent="rotation" instance=ExtResource( 2 )]
-transform = Transform( -0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, 0, 0, 0 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 
 [node name="feet" type="RayCast" parent="."]
 enabled = true
