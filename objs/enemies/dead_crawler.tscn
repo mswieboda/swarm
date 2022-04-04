@@ -213,3 +213,8 @@ draw_pass_1 = SubResource( 22 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.297724, 0 )
 stream = ExtResource( 3 )
 unit_db = 41.0
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]

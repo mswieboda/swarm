@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://objs/player/guns/blood_particles.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+albedo_color = Color( 0.537255, 0, 0, 0.639216 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3( 0, 1, 0 )
+spread = 90.0
+initial_velocity = 7.9
+initial_velocity_random = 0.5
+
+[sub_resource type="SphereMesh" id=8]
+radius = 0.3
+height = 0.6
+
+[node name="blood_particles" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="particles" type="Particles" parent="."]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0 )
+material_override = SubResource( 6 )
+emitting = false
+amount = 93
+lifetime = 0.13
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB( -0.763212, -0.603776, -1.08318, 1.52642, 1.20755, 2.16636 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="timer" to="particles" method="_on_timer_timeout"]

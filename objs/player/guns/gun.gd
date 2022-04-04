@@ -10,6 +10,7 @@ export (AudioStream) var reload_sound
 export (AudioStream) var empty_sound
 
 export (PackedScene) var bullet_impact
+export (PackedScene) var blood_scene
 
 export var fire_animation = "default"
 export var reload_animation = "default"
@@ -127,19 +128,28 @@ func spawn_impact():
 
   var body = ray.get_collider()
 
-  if body is RigidBody or body is KinematicBody:
+  if body is RigidBody or !body.is_inside_tree():
     return
 
-  var impact = bullet_impact.instance()
-  var position = ray.get_collision_point()
-  var normal = ray.get_collision_normal()
+  var impact
+
+  if body.has_meta("type") and body.get_meta("type") == "enemy":
+    impact = blood_scene.instance()
+  else:
+    impact = bullet_impact.instance()
 
   body.add_child(impact)
 
-  impact.rotation_degrees.z = rand_range(0, 360)
+  if !impact.is_inside_tree():
+    return
+
+  var position = ray.get_collision_point()
+  var normal = ray.get_collision_normal()
+
   impact.global_transform.origin = position
-  impact.global_transform.basis = perpendicular_basis_from_normal(normal)
   impact.global_transform.origin += normal * HEIGHT_LAYERING_RATIO
+  impact.global_transform.basis = perpendicular_basis_from_normal(normal)
+  impact.rotation_degrees.z = rand_range(0, 360)
 
 func spawn_shell():
   pass
