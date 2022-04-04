@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://objs/base/base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objs/player/player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/Roboto-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://objs/units/soldier.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objs/levels/game_world_small.tscn" type="PackedScene" id=6]
-[ext_resource path="res://objs/enemies/crawler.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=4]
 size = 36
@@ -57,6 +56,17 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="Theme" id=15]
 default_font = SubResource( 14 )
+
+[sub_resource type="ProceduralSky" id=16]
+sky_top_color = Color( 0.6, 0.6, 0.6, 1 )
+sun_longitude = 95.0
+
+[sub_resource type="Environment" id=17]
+background_mode = 2
+background_sky = SubResource( 16 )
+fog_enabled = true
+fog_color = Color( 0.556863, 0.556863, 0.556863, 1 )
+fog_depth_begin = 21.1
 
 [node name="world" type="Spatial"]
 script = ExtResource( 3 )
@@ -165,8 +175,6 @@ soldier_scene = ExtResource( 5 )
 
 [node name="enemies" type="Spatial" parent="."]
 
-[node name="crawler" parent="enemies" instance=ExtResource( 7 )]
-
 [node name="dead_enemies" type="Spatial" parent="."]
 
 [node name="units" type="Spatial" parent="."]
@@ -176,5 +184,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3983, -0.00548711, 0 )
 
 [node name="game_world_small" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0582066, 0 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 17 )
 
 [connection signal="confirmed" from="hud/margin/center/game_over_dialog" to="." method="_on_game_over_dialog_confirmed"]
