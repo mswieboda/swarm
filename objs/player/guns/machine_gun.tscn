@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/guns/machine_gun/MG_25_material.material" type="Material" id=1]
+[ext_resource path="res://objs/player/guns/muzzle_flash.tscn" type="PackedScene" id=2]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "machine_gun_Cube001"
@@ -84,3 +85,6 @@ anims/reload_anim = SubResource( 3 )
 anims/run_animation = SubResource( 4 )
 anims/run_transition = SubResource( 5 )
 anims/walk_anim = SubResource( 6 )
+
+[node name="muzzle_flash" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.292337, 0.0170026, 0 )
