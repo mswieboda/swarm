@@ -2,7 +2,7 @@
 
 [ext_resource path="res://objs/enemies/crawler.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/crawler/crawler.tres" type="ArrayMesh" id=2]
-[ext_resource path="res://assets/sounds/gun_shot.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/squish.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape" id=5]
 radius = 0.293143
@@ -703,6 +703,8 @@ material/0 = null
 anims/crawling_action = SubResource( 3 )
 anims/hitting_action = SubResource( 4 )
 
-[node name="audio_hit" type="AudioStreamPlayer3D" parent="."]
+[node name="audio_squish" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 3 )
+unit_db = 5.0
+unit_size = 10.0
 max_db = 6.0

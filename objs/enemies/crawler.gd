@@ -34,4 +34,5 @@ func do_attack_animation():
   $animation.play("hitting_action")
 
 func took_damage():
-  $audio_hit.play()
+  $audio_squish.pitch_scale = rand_range(0.75, 1.15)
+  $audio_squish.play()
