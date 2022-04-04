@@ -1,10 +1,12 @@
 extends "res://objs/enemies/enemy.gd"
 
+const GRAVITY = -32.8
 const SPEED = 3
 const CRAWLER_DAMAGE = 10
 const MAX_SLOPE_ANGLE = 75
 
 var target : Spatial = null
+var vel = Vector3()
 
 func _ready():
   enemy_damage = CRAWLER_DAMAGE
@@ -17,11 +19,17 @@ func _physics_process(delta):
   else:
     set_new_target()
 
-func move_towards_target(_delta):
+func move_towards_target(delta):
   $animation.play("crawling_action")
 
-  var velocity = -transform.basis.z * SPEED
-  var _v = move_and_slide(velocity, Vector3(0, 1, 0), true, 4, deg2rad(MAX_SLOPE_ANGLE))
+  var hvel = -transform.basis.z * SPEED
+
+  vel.y += delta * GRAVITY
+
+  vel.x = hvel.x
+  vel.z = hvel.z
+
+  vel = move_and_slide(vel, Vector3(0, 1, 0), true, 4, deg2rad(MAX_SLOPE_ANGLE))
 
 func set_new_target():
   var supply_depot = get_tree().get_root().find_node("supply_depot", true, false)
