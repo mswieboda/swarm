@@ -121,8 +121,8 @@ func play_footsteps():
 
 func enable_placing():
   is_placing = true
-  $rotation/guns.disable()
+  $rotation/camera/guns.disable()
 
 func disable_placing():
   is_placing = false
-  $rotation/guns.enable()
+  $rotation/camera/guns.enable()
