@@ -1,7 +1,7 @@
 extends Spatial
 
-const DISTANCE_MIN = 205
-const DISTANCE_MAX = 225
+const DISTANCE_MIN = 100
+const DISTANCE_MAX = 130
 const WAVE_ENEMY_MULTIPLIER = 5
 const WAVE_SPAWNS_PER_INTERVAL = 2
 const WAVE_SPAWN_INTERVAL = 1 * 60
@@ -66,7 +66,9 @@ func spawn_vector():
     z_sign = -1
 
   var z = sqrt(pow(distance, 2) + pow(x, 2)) * z_sign
-  var v = Vector3(x, 0, z)
+  # TODO: find y of terrain, and add like 1 or 3 to it
+  var y = 13 # estimated max height of terrain
+  var v = Vector3(x, y, z)
 
   return v
 
