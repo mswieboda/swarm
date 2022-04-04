@@ -2,7 +2,7 @@ extends KinematicBody
 
 const GRAVITY = -32.8
 const MAX_SPEED = 5
-const JUMP_SPEED = 12
+const JUMP_SPEED = 9
 const ACCEL = 4.5
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
