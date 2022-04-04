@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objs/player/guns/machine_gun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/units/soldier.material" type="Material" id=2]
+[ext_resource path="res://objs/units/soldier.gd" type="Script" id=3]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "soldier_Plane"
@@ -197,6 +198,7 @@ tracks/16/enabled = true
 tracks/16/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0833333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [node name="soldier" type="Spatial"]
+script = ExtResource( 3 )
 
 [node name="Armature" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0734279, 0 )
@@ -298,3 +300,8 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.08494
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fire_action = SubResource( 3 )
+
+[node name="fire_timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="fire_timer" to="." method="_on_fire_timer_timeout"]
