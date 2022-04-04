@@ -186,5 +186,6 @@ transform = Transform( 0.305058, 0, -0.0338617, 0, 0.306931, 0, 0.0338617, 0, 0.
 [node name="units" type="Spatial" parent="."]
 
 [node name="soldier" parent="units" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3983, -0.00548711, 0 )
 
 [connection signal="confirmed" from="hud/margin/center/game_over_dialog" to="." method="_on_game_over_dialog_confirmed"]
