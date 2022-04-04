@@ -12,12 +12,10 @@ const MAX_SPRINT_SPEED = 10
 const SPRINT_ACCEL = 9
 
 export var is_disabled = false
-export (PackedScene) var soldier_scene
 
 var vel = Vector3()
 var dir = Vector3()
 var is_sprinting = false
-var is_placing = false
 var can_climb_ladder = false
 var inaccuracy = 0.0
 var camera
@@ -47,7 +45,6 @@ func process_input():
   process_sprint()
   process_walk_direction()
   process_jump()
-  process_placement()
 
 func process_sprint():
   if !is_sprinting and Input.is_action_just_pressed("sprint"):
@@ -102,20 +99,6 @@ func process_jump():
   if Input.is_action_pressed("jump") and is_on_floor():
     vel.y = JUMP_SPEED
 
-func process_placement():
-  if !is_placing:
-    return
-
-  if Input.is_action_just_pressed("placement"):
-    $audio_placement.play()
-    var soldier : Spatial = soldier_scene.instance()
-
-    soldier.global_transform = global_transform
-
-    soldier.rotate_y(deg2rad(180))
-
-    get_parent().get_node("units").add_child(soldier)
-
 func process_movement(delta):
   dir.y = 0
   dir = dir.normalized()
@@ -169,12 +152,9 @@ func play_footsteps():
   $audio_footsteps.play()
 
 func enable_placing():
-  is_placing = true
   $rotation/camera/guns.disable()
 
 func disable_placing():
-  is_placing = false
-
   if !is_disabled:
     $rotation/camera/guns.enable()
 
