@@ -160,6 +160,7 @@ valign = 1
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.993896, 0, -0.110323, 0, 1, 0, 0.110323, 0, 0.993896, 0.0679823, 0.791372, -4.76562 )
+soldier_scene = ExtResource( 5 )
 
 [node name="enemies" type="Spatial" parent="."]
 
