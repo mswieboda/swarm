@@ -3,6 +3,7 @@ extends KinematicBody
 const GRAVITY = -32.8
 const MAX_SPEED = 5
 const JUMP_SPEED = 7
+const LADDER_SPEED = 3
 const ACCEL = 4.5
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
@@ -17,6 +18,7 @@ var vel = Vector3()
 var dir = Vector3()
 var is_sprinting = false
 var is_placing = false
+var can_climb_ladder = false
 var inaccuracy = 0.0
 var camera
 var rotation_helper
@@ -59,9 +61,15 @@ func process_walk_direction():
   var input_movement_vector = Vector2()
 
   if Input.is_action_pressed("forward"):
-    input_movement_vector.y += 1
+    if can_climb_ladder:
+      vel.y = LADDER_SPEED
+    else:
+      input_movement_vector.y += 1
   if Input.is_action_pressed("back"):
-    input_movement_vector.y -= 1
+    if can_climb_ladder:
+      vel.y = -LADDER_SPEED
+    else:
+      input_movement_vector.y -= 1
   if Input.is_action_pressed("strafe_left"):
     input_movement_vector.x -= 1
   if Input.is_action_pressed("strafe_right"):
@@ -171,3 +179,8 @@ func _on_sprint_timer_timeout():
   guns.play_walk_transition()
   is_sprinting = false
 
+func enable_climb_ladder():
+  can_climb_ladder = true
+
+func disable_climb_ladder():
+  can_climb_ladder = false
