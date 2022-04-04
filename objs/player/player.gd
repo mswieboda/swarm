@@ -10,12 +10,14 @@ const MOUSE_SENSITIVITY = 0.05
 const MAX_SPRINT_SPEED = 10
 const SPRINT_ACCEL = 9
 
+export var is_disabled = false
 export (PackedScene) var soldier_scene
 
 var vel = Vector3()
 var dir = Vector3()
 var is_sprinting = false
 var is_placing = false
+var is_debug_disabled = false
 var inaccuracy = 0.0
 var camera
 var rotation_helper
@@ -26,10 +28,16 @@ func _ready():
   camera = $rotation/camera
   rotation_helper = $rotation
 
+  if is_disabled:
+    camera.current = false
+
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
+  if is_disabled:
+    return
+
   process_input()
   process_movement(delta)
 
@@ -130,6 +138,9 @@ func process_movement(delta):
   inaccuracy = vel.length()
 
 func _input(event):
+  if is_disabled:
+    return
+
   if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
     rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
     self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))

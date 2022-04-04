@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/camera_free_look.gd" type="Script" id=1]
+
+[node name="camera_free_look" type="Camera"]
+transform = Transform( -0.000248312, -0.948705, 0.316162, -0.000745108, 0.316162, 0.948705, -1, -2.91038e-11, -0.000785395, 58.5851, 181.214, 0 )
+current = true
+fov = 90.0
+far = 330.0
+script = ExtResource( 1 )
+sensitivity = 0.5
