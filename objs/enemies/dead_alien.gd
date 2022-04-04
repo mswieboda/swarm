@@ -7,7 +7,7 @@ var time = 0
 func _ready():
   pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
   if time == 0:
     $blood_particles.emitting = true
 
