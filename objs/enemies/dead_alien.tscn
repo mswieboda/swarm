@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/enemies/crawler/crawler_material.material" type="Material" id=1]
 [ext_resource path="res://objs/enemies/dead_alien.gd" type="Script" id=2]
@@ -101,6 +101,18 @@ surfaces/0 = {
 "vertex_count": 3904
 }
 
+[sub_resource type="SpatialMaterial" id=19]
+flags_use_shadow_to_opacity = true
+albedo_color = Color( 0.74902, 0, 0, 1 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+direction = Vector3( 0, 1, 0 )
+spread = 20.0
+initial_velocity = 7.0
+initial_velocity_random = 0.4
+
+[sub_resource type="SphereMesh" id=21]
+
 [node name="dead_alien" type="Spatial"]
 script = ExtResource( 2 )
 
@@ -179,3 +191,13 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 mesh = SubResource( 5 )
 skeleton = NodePath("../..")
 material/0 = null
+
+[node name="blood_particles" type="Particles" parent="."]
+transform = Transform( 0.308658, 0, 0, 0, 0.308658, 0, 0, 0, 0.308658, 0, 0.27328, 0 )
+material_override = SubResource( 19 )
+emitting = false
+amount = 15
+one_shot = true
+visibility_aabb = AABB( -0.763212, -0.603776, -0.442154, 1.52642, 1.20755, 0.884308 )
+process_material = SubResource( 20 )
+draw_pass_1 = SubResource( 21 )
