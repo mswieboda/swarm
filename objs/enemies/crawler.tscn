@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://objs/enemies/crawler.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/crawler/crawler.tres" type="ArrayMesh" id=2]
@@ -530,6 +530,24 @@ tracks/29/imported = false
 tracks/29/enabled = true
 tracks/29/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.708333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+albedo_color = Color( 0.537255, 0, 0, 0.639216 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3( 0, 1, 0 )
+spread = 90.0
+initial_velocity = 7.9
+initial_velocity_random = 0.5
+
+[sub_resource type="SphereMesh" id=8]
+radius = 0.3
+height = 0.6
+
 [node name="crawler" type="KinematicBody"]
 collision_layer = 4
 collision_mask = 5
@@ -708,3 +726,15 @@ stream = ExtResource( 3 )
 unit_db = 5.0
 unit_size = 10.0
 max_db = 6.0
+
+[node name="blood_particles" type="Particles" parent="."]
+transform = Transform( 0.0551638, 0, 0, 0, 0.0551638, 0, 0, 0, 0.0551638, 0, 0.27328, 0 )
+material_override = SubResource( 6 )
+emitting = false
+amount = 93
+lifetime = 0.13
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB( -0.763212, -0.603776, -1.08318, 1.52642, 1.20755, 2.16636 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
