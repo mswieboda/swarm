@@ -22,6 +22,7 @@ export var ammo_clip_size = DEFAULT_AMMO_CLIP_SIZE
 export var bullet_spread_amount = DEFAULT_BULLET_SPREAD
 
 onready var guns_root = get_parent().get_parent()
+onready var player = guns_root.get_parent().get_parent().get_parent()
 onready var bullet_spread = guns_root.get_node("bullet_spread")
 onready var ray = bullet_spread.get_node("ray")
 
@@ -54,7 +55,7 @@ func disable():
   visible = false
 
 func process_fire():
-  if !Input.is_action_pressed("fire") or !$fire_rate_timer.is_stopped():
+  if !Input.is_action_pressed("fire") or !$fire_rate_timer.is_stopped() or player.is_sprinting:
     return
 
   if ammo > 0:
@@ -86,9 +87,39 @@ func apply_ammo():
   ammo -= 1
   update_hud_ammo()
 
-func play_animation(animation, speed = 1.0):
-  $AnimationPlayer.stop()
-  $AnimationPlayer.play(animation, -1, speed, false)
+func play_walk_animation():
+  if is_reloading:
+    return
+
+  play_animation(walk_animation, false)
+
+func play_run_transition():
+  if is_reloading:
+    return
+
+  play_animation(run_transition)
+
+func play_run_animation():
+  if is_reloading:
+    return
+
+  play_animation(run_animation, false)
+
+func play_walk_transition():
+  if is_reloading:
+    return
+
+  play_animation_backwards(run_transition)
+
+func play_animation(animation, stop = true):
+  if stop:
+    $AnimationPlayer.stop()
+  $AnimationPlayer.play(animation)
+
+func play_animation_backwards(animation, stop = true):
+  if stop:
+    $AnimationPlayer.stop()
+  $AnimationPlayer.play(animation, -1, -1, true)
 
 func spawn_impact():
   if !ray.is_colliding():
@@ -124,7 +155,7 @@ func fire_damage():
       pass
 
 func process_reload():
-  if !Input.is_action_pressed("reload") or is_reloading or ammo == ammo_clip_size:
+  if !Input.is_action_pressed("reload") or is_reloading or ammo == ammo_clip_size or player.is_sprinting:
     return
 
   is_reloading = true

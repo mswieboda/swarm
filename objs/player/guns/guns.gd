@@ -28,13 +28,13 @@ func disable():
   gun.disable()
 
 func play_walk_animation():
-  gun.get_node("AnimationPlayer").play(gun.walk_animation)
+  gun.play_walk_animation()
 
 func play_run_transition():
-  gun.get_node("AnimationPlayer").play(gun.run_transition)
+  gun.play_run_transition()
 
 func play_run_animation():
-  gun.get_node("AnimationPlayer").play(gun.run_animation)
+  gun.play_run_animation()
 
 func play_walk_transition():
-  gun.get_node("AnimationPlayer").play_backwards(gun.run_transition)
+  gun.play_walk_transition()
