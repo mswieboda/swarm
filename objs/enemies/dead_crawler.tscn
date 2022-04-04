@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/enemies/crawler/crawler_material.material" type="Material" id=1]
 [ext_resource path="res://objs/enemies/dead_alien.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/alien_squeal.wav" type="AudioStream" id=3]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "dead_crawler_Plane"
@@ -207,3 +208,8 @@ explosiveness = 1.0
 visibility_aabb = AABB( -0.763212, -0.603776, -1.08318, 1.52642, 1.20755, 2.16636 )
 process_material = SubResource( 20 )
 draw_pass_1 = SubResource( 22 )
+
+[node name="audio_squeal" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.297724, 0 )
+stream = ExtResource( 3 )
+unit_db = 25.0

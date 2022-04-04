@@ -10,6 +10,7 @@ func _ready():
 func _process(_delta):
   if time == 0:
     $blood_particles.emitting = true
+    $audio_squeal.playing = true
 
 func _physics_process(delta):
   if time >= MAX_TIME:
