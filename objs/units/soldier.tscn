@@ -199,7 +199,6 @@ tracks/16/enabled = true
 tracks/16/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0833333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 7, 3, 7 )
 
 [node name="soldier" type="Spatial"]
 script = ExtResource( 3 )
@@ -303,7 +302,7 @@ material/0 = null
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0849499, 0.768202, -0.278957 )
 
 [node name="fire_timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.15
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -315,6 +314,7 @@ collision_mask = 4
 input_ray_pickable = false
 
 [node name="collision" type="CollisionShape" parent="area"]
+transform = Transform( 15, 0, 0, 0, 5, 0, 0, 0, 15, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="audio_fire" type="AudioStreamPlayer3D" parent="."]

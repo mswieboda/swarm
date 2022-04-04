@@ -2,7 +2,8 @@ extends Spatial
 
 const DISTANCE_MIN = 100
 const DISTANCE_MAX = 130
-const WAVE_ENEMY_MULTIPLIER = 5
+const WAVE_INITIAL_ENEMIES = 30
+const WAVE_ENEMY_MULTIPLIER = 20
 const WAVE_SPAWNS_PER_INTERVAL = 2
 const WAVE_SPAWN_INTERVAL = 1 * 60
 const WAVE_TIMER = 5 * 60
@@ -145,7 +146,9 @@ func end_wave():
   $player.enable_placing()
 
 func next_wave():
-  for _n in range(wave * WAVE_ENEMY_MULTIPLIER):
+  var enemies = WAVE_INITIAL_ENEMIES + wave * WAVE_ENEMY_MULTIPLIER
+
+  for _n in range(enemies):
     spawn_enemy(crawler_scene)
 
   is_wave_ended = false

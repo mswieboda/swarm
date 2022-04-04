@@ -1,8 +1,8 @@
 extends "res://objs/enemies/enemy.gd"
 
 const GRAVITY = -32.8
-const SPEED = 3
-const CRAWLER_DAMAGE = 10
+const SPEED = 5
+const CRAWLER_DAMAGE = 5
 const MAX_SLOPE_ANGLE = 75
 
 var target : Spatial = null
