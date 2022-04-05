@@ -4,8 +4,6 @@ const DISTANCE_MIN = 105
 const DISTANCE_MAX = 135
 const WAVE_INITIAL_ENEMIES = 15
 const WAVE_ENEMY_MULTIPLIER = 10
-const WAVE_SPAWNS_PER_INTERVAL = 2
-const WAVE_SPAWN_INTERVAL = 1 * 60
 const GAME_OVER_TIMER = 1
 
 export (PackedScene) var soldier_scene
@@ -43,7 +41,6 @@ func _physics_process(delta):
     if is_wave_started:
       next_wave()
   else:
-    check_wave_spawns(delta)
     check_end_wave(delta)
     check_end_game(delta)
 
@@ -85,8 +82,6 @@ func draw_hud():
 
   if is_wave_ended:
     wave_info = "wave ended, make preparations and press ENTER to start"
-  else:
-    wave_info = "next enemy in: " + show_time(wave_interval_timer() - wave_interval_time)
 
   $hud/margin/vbox/wave_info.text = wave_info
 
@@ -121,16 +116,6 @@ func check_end_game(delta):
 func check_end_wave(_delta):
   if num_enemies <= 0:
     end_wave()
-
-func wave_interval_timer():
-  return WAVE_SPAWN_INTERVAL / (WAVE_SPAWNS_PER_INTERVAL * wave)
-
-func check_wave_spawns(delta):
-  if wave_interval_time >= wave_interval_timer():
-    wave_interval_time = 0
-    spawn_enemy(crawler_scene)
-  else:
-    wave_interval_time += delta
 
 func end_wave():
   is_wave_ended = true
