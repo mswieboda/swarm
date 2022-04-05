@@ -26,7 +26,7 @@ func do_firing():
   fire_at_target()
 
 func fire_at_target():
-  if !target.has_method("take_damage"):
+  if !target.is_inside_tree() or !target.has_method("take_damage"):
     return
 
   # TODO: rotate to target over a few frames instead of instantly
