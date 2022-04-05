@@ -2,8 +2,8 @@ extends Spatial
 
 const DISTANCE_MIN = 105
 const DISTANCE_MAX = 135
-const WAVE_INITIAL_ENEMIES = 15
-const WAVE_ENEMY_MULTIPLIER = 10
+const WAVE_INITIAL_ENEMIES = 20
+const WAVE_ENEMY_MULTIPLIER = 15
 const GAME_OVER_TIMER = 1
 
 export (PackedScene) var soldier_scene

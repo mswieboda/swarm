@@ -20,6 +20,9 @@ func _physics_process(delta):
     set_new_target()
 
 func move_towards_target(delta):
+  if target.is_inside_tree():
+    look_at(target.global_transform.origin, Vector3.UP)
+
   $animation.play("crawling_action")
 
   var hvel = -transform.basis.z * SPEED
