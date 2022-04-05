@@ -56,7 +56,7 @@ func disable():
   visible = false
 
 func process_fire():
-  if !Input.is_action_pressed("fire") or !$fire_rate_timer.is_stopped() or player.is_sprinting:
+  if !Input.is_action_pressed("fire") or !$fire_rate_timer.is_stopped() or player.is_sprinting or is_reloading:
     return
 
   if ammo > 0:
