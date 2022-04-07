@@ -69,7 +69,7 @@ func process_fire():
   $fire_rate_timer.start()
 
 func fire():
-  play_sound(fire_sound)
+  play_sound(fire_sound, -7)
   play_animation(fire_animation)
   fire_damage()
   spawn_impact()
